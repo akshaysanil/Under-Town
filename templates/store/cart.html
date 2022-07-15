@@ -1,0 +1,198 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+
+ <!--================Home Banner Area =================-->
+  <!-- breadcrumb start-->
+  <section class="breadcrumb ">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          <div class="breadcrumb_iner">
+            <div class="breadcrumb_iner_item">
+              <h2>Cart Products</h2>
+              <p>Fashion <span>-</span>Cart Products</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- breadcrumb start-->
+
+  {% if not cart_items %}
+  <br>
+  <br>
+  <h2 class="text-center">Your Shopping Cart Is Empty</h2>
+  <br>
+  <div class="text-center">
+    <a href="{% url 'store' %}" class="btn btn-primary">
+      Continue Shopping
+    </a>
+  </div>
+
+
+  {% else %}
+
+  <!--================Cart Area =================-->
+  <section class="cart_area padding_top">
+    <div class="container">
+      <div class="cart_inner">
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Product</th>
+                <th scope="col">Price</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for cart_item in cart_items %}
+                <tr>
+                  <td>
+                    <div class="media">
+                      <div class="d-flex" style="height:20vh" >
+                        <img src="{{cart_item.product.product_image.url}}" class=" img-sm"alt="" />
+                      </div>
+                      <div class="media-body">
+                        <h4>{{cart_item.product.brand}}</h4>
+                        <a href="{{cart_item.product.get_url}}"><p>{{cart_item.product.product_name}}</p></a>
+
+                        {% if cart_item.variations.all %}
+                          {% for item in cart_item.variations.all %}
+                            {{item.variation_category | capfirst}} : {{item.variation_value | capfirst}} <br>
+                          
+                          {% endfor %}
+                        {% endif %}
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <h5>${{cart_item.product.price}}.00</h5>
+                  </td>
+                                  {% comment %} cart Quantity minus and plus option {% endcomment %}
+                  <td>
+                    <div class="product_count">
+                      <a href="{% url 'remove_cart' cart_item.product.id cart_item.id%}">
+                        <span  class="input-number-decrement">
+                          <i class="ti-angle-down"></i>
+                        </span>
+                      </a>
+
+                      <input class="input-number" type="text" value="{{cart_item.quantity}}" min="0" max="">
+
+                      <form action="{% url 'add_cart' cart_item.product.id  %}" method="POST">
+                        {% csrf_token %}
+                        {% for item in cart_item.variations.all %}
+                          <input type="hidden" name="{{item.variation_category | lower}}" value="{{item.variation_value | capfirst}}">
+                        {% endfor %}
+                          <button type="submit" class="btn btn-dark "><i class="ti-angle-up" ></i></span></button>
+                    </form>
+                    </div>
+                  </td>
+                  <td class="text-right">
+                    <a href="{% url 'remove_cart_item' cart_item.product.id cart_item.id%}" class="btn_1">remove</a>
+                  </td>
+                  <td>
+                    <h5>${{cart_item.sub_total}}.00</h5>
+                  </td>
+                </tr>
+              {% endfor %}
+              <tr>
+                <td></td>
+                <td></td>
+                <td>
+                  <h5>Subtotal</h5>
+                  <h5>${{total}}.00</h5>
+                </td>
+              </tr>
+              <tr>
+                <td></td>
+                <td></td>
+                <td>
+                  <h5>Tax</h5>
+                  <h5>${{tax}}.00</h5>
+                </td>
+              </tr>
+              <tr>
+                <td></td>
+                <td></td>
+                <td>
+                  <h4>Grand Total</h4>
+                  <h4>${{grand_total}}</h4>
+                </td>
+              </tr>
+            
+         
+              <tr class="bottom_button">
+                <td>
+                  <a class="btn_1" href="#">Update Cart</a>
+                </td>
+                <td></td>
+                <td></td>
+                <td>
+                  <div class="cupon_text float-right">
+                    <a class="btn_1" href="#">Close Coupon</a>
+                  </div>
+                </td>
+              </tr>
+           <!--   <tr class="shipping_area"> 
+                <td></td>
+                <td></td>
+                <td>
+                  <h5>Shipping</h5>
+                </td>
+                <td>
+                  <div class="shipping_box">
+                    <ul class="list">
+                      <li>
+                        <a href="#">Flat Rate: $5.00</a>
+                      </li>
+                      <li>
+                        <a href="#">Free Shipping</a>
+                      </li>
+                      <li>
+                        <a href="#">Flat Rate: $10.00</a>
+                      </li>
+                      <li class="active">
+                        <a href="#">Local Delivery: $2.00</a>
+                      </li>
+                    </ul>
+                    <h6>
+                      Calculate Shipping
+                      <i class="fa fa-caret-down" aria-hidden="true"></i>
+                    </h6>
+                    <select class="shipping_select">
+                      <option value="1">Bangladesh</option>
+                      <option value="2">India</option>
+                      <option value="4">Pakistan</option>
+                    </select>
+                    <select class="shipping_select section_bg">
+                      <option value="1">Select a State</option>
+                      <option value="2">Select a State</option>
+                      <option value="4">Select a State</option>
+                    </select>
+                    <input type="text" placeholder="Postcode/Zipcode" />
+                    <a class="btn_1" href="#">Update Details</a>
+                  </div>
+                </td>
+              </tr> -->
+            </tbody>
+          </table>
+          <div class="checkout_btn_inner float-right">
+            <a class="btn_1" href="{% url 'store' %}">Continue Shopping</a>
+            <a class="btn_1 checkout_btn_1" href="{% url 'checkout' %}">Proceed to checkout</a>
+          </div>
+        </div>
+      </div>
+    </section>
+    {% endif %}
+  <!--================End Cart Area =================-->
+
+
+
+{% endblock content %}

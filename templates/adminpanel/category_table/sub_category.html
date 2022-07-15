@@ -1,0 +1,62 @@
+{% extends 'adminpanel/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<!-- Begin Page Content -->
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">Sub Category Table</h1>
+    <p class="mb-4">Product Sub-Category details </p>
+
+
+    
+
+<!-- DataTales Example -->
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Sub Category -lists </h6>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                
+                <thead>
+                    <tr>
+                        <th>Sub Category Name</th>
+                        <th>Slug</th>
+                        <th>Main & Catogory connection</th>
+                        <th class="text-center"><a href="{% url 'add_sub_category' %}" class="btn btn-dark">Add New sub-category</a></th>
+
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    {% if sub_category %}
+                        {% for cat in sub_category %}
+                            <tr>
+                                <td>{{cat.sub_category_name}}</td>
+                                <td>{{cat.slug}}</td>
+                                <td>{{cat.category}}</td>
+                                <td class="text-center">
+                                    <a href="{% url 'edit_sub_category'  cat.id%}" class="btn btn-success">Edit </a>
+                                    <a href="{% url 'delete_sub_category'  cat.id%}" class="btn btn-danger" onclick="return confirm('Delete {{cat.sub_category_name}} ,are you sure?')">Delete </a> 
+                                    
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    {% endif %}
+                    
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<!-- /.container-fluid -->
+
+</div>
+<!-- End of Main Content -->
+
+{% endblock content %}

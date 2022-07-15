@@ -1,0 +1,60 @@
+{% extends 'adminpanel/base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<!-- Begin Page Content -->
+<div class="container-fluid">
+
+   <!-- Page Heading -->
+   <h1 class="h3 mb-2 text-gray-800">Awesome products table</h1>
+   <p class="mb-4">Awesome products</p>
+   
+<!-- DataTales Example -->
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Most awesome products</h6>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+
+                    <tr>
+                        <th>Category</th>
+                        <th>Title</th>
+                        <th>Banner image</th>
+                        <th>Is available</th>
+                        <th><a href="" class="btn btn-dark">Add new banner</a></th>
+                    </tr>
+                </thead>
+
+                
+
+                <tbody>
+
+                    {% if order_products %}
+                        {% for order_prodcut in order_products %}
+                            <tr>
+                                <td>{{order_prodcut.product}}</td>
+                                <td>{{order_prodcut.user}}</td>
+                                <td>{{order_prodcut.order}}</td>
+                                <td>{{order_prodcut.quantity}}</td>
+                                <td>$ {{order_prodcut.product_price}}</td>
+                                <td>{{order_prodcut.payment_id}}</td>
+                            </tr>
+                        {% endfor %}
+                    {% endif %}
+                    
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<!-- /.container-fluid -->
+</div>
+<!-- /.main end -->
+
+
+{% endblock content %}

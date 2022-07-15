@@ -1,0 +1,55 @@
+{% extends 'adminpanel/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<!-- Begin Page Content -->
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">Main-Category Table</h1>
+    <p class="mb-4">Product Main-Category details </p>
+
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Main Category -list</h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Maincategory name</th>
+                            <th>Slug</th>
+                            <th class="text-center"><a href="{% url 'add_main_category' %}" class="btn btn-dark">Add New main-category</a></th>
+                        
+                        </tr>
+                    </thead>
+                   
+                    <tbody>
+                        {% if main_category %}
+                            {% for category in main_category %}
+                                <tr>
+                                    <td>{{category.main_category_name}}</td>
+                                    <td>{{category.slug}}</td>
+                                    <td class="text-center">
+                                        <a href="{% url 'edit_main_category'  category.id%}" class="btn btn-success">Edit </a> 
+                                        <a href="{% url 'delete_main_category'  category.id%}" class="btn btn-danger" onclick="return confirm('Delete {{category.main_category_name}} ,are you sure?')">Delete </a> 
+                                        
+                                    </td>
+                                    
+                                </tr>
+                            {% endfor %}
+                        {% endif %}
+                        
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+                <!-- .container-fluid -->
+</div>
+<!-- End of Main Content -->
+
+{% endblock content %}

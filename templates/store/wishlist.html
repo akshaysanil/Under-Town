@@ -1,0 +1,161 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+ <!--================Home Banner Area =================-->
+  <!-- breadcrumb start-->
+  <section class="breadcrumb" style='background-color:#ecfdff'>
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          <div class="breadcrumb_iner">
+            <div class="breadcrumb_iner_item">
+              <h2>Your Favorites</h2>
+              <p>Fashion <span>-</span>Wishlist items</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- breadcrumb start-->
+
+  {% if not wishlist_items %}
+  <br>
+  <br>
+  <h2 class="text-center">Your Wishlist Is Empty</h2>
+  <br>
+  <div class="text-center">
+    <a href="{% url 'store' %}" class="btn btn-primary">
+      Continue Shopping
+    </a>
+  </div>
+
+
+  {% else %}
+
+  <!--================Cart Area =================-->
+  <section class="cart_area padding_top">
+    <div class="container">
+      <div class="cart_inner">
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Product</th>
+                <th scope="col">Price</th>
+                {% comment %} <th scope="col">Total</th> {% endcomment %}
+              </tr>
+            </thead>
+            <tbody>
+              {% for wishlist_item  in wishlist_items %}
+              <tr>
+                <td>
+                  <div class="media">
+                    <div class="d-flex" style="height:20vh">
+                      <img src="{{wishlist_item.product.product_image.url}}" class=" img-sm"alt="" />
+                    </div>
+                    <div class="media-body">
+                      <h4>{{wishlist_item.product.brand}}</h4>
+                      <a href="{{wishlist_item.product.get_url}}"><p>{{wishlist_item.product.product_name}}</p></a>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <h5>${{wishlist_item.product.price}}. 00</h5>
+                </td>
+                  
+                {% comment %} <td>
+                  <div class="product_count">
+                    <span class="input-number-decrement"> <i class="ti-angle-down"></i></span>
+                    <input class="input-number" type="text" value="1" min="0" max="10">
+                    <span class="input-number-increment"> <i class="ti-angle-up"></i></span>
+                  </div>
+                </td> {% endcomment %}
+                {% comment %} <td>
+                  <h5>$720.00</h5>
+                </td> {% endcomment %}
+                <td class="text-right">
+                  <a href="{% url 'remove_wishlist_item' wishlist_item.product.id wishlist_item.id%}" class="btn_1">remove</a>
+                </td>
+                <td>
+              </tr>
+             {% endfor %}
+             
+              <tr class="bottom_button">
+                <td>
+                  <a class="btn_1" href="#">Update Cart</a>
+                </td>
+                <td></td>
+                <td></td>
+                <td>
+                  <div class="cupon_text float-right">
+                    <a class="btn_1" href="#">Close Coupon</a>
+                  </div>
+                </td>
+              </tr>
+              {% comment %} <tr>
+                <td></td>
+                <td></td>
+                <td>
+                  <h5>Subtotal</h5>
+                </td>
+                <td>
+                  <h5>$2160.00</h5>
+                </td>
+              </tr> {% endcomment %}
+              {% comment %} <tr class="shipping_area">
+                <td></td>
+                <td></td>
+                <td>
+                  <h5>Shipping</h5>
+                </td> 
+                    <td> 
+                     <div class="shipping_box">
+                    <ul class="list">
+                      <li>
+                        <a href="#">Flat Rate: $5.00</a>
+                      </li>
+                      <li>
+                        <a href="#">Free Shipping</a>
+                      </li>
+                      <li>
+                        <a href="#">Flat Rate: $10.00</a>
+                      </li>
+                      <li class="active">
+                        <a href="#">Local Delivery: $2.00</a>
+                      </li>
+                    </ul>
+                    <h6>
+                      Calculate Shipping
+                      <i class="fa fa-caret-down" aria-hidden="true"></i>
+                    </h6>
+                    <select class="shipping_select">
+                      <option value="1">Bangladesh</option>
+                      <option value="2">India</option>
+                      <option value="4">Pakistan</option>
+                    </select>
+                    <select class="shipping_select section_bg">
+                      <option value="1">Select a State</option>
+                      <option value="2">Select a State</option>
+                      <option value="4">Select a State</option>
+                    </select>
+                    <input type="text" placeholder="Postcode/Zipcode" />
+                    <a class="btn_1" href="#">Update Details</a>
+                  </div>
+                </td>
+              </tr> {% endcomment %}
+            </tbody>
+          </table>
+          <div class="checkout_btn_inner float-right">
+            <a class="btn_1" href="#">Continue Shopping</a>
+            <a class="btn_1 checkout_btn_1" href="#">Proceed to checkout</a>
+          </div>
+        </div>
+      </div>
+  </section>
+  <!--================End Cart Area =================-->
+  {% endif %}
+
+{% endblock content %}

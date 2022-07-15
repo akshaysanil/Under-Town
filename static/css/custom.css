@@ -1,0 +1,32 @@
+ .rate > input {
+     display:  none;
+
+ }
+
+ .rate {
+     display: inline-block;
+     border: 0;
+ }
+ .rate > label{
+    float: right }
+ /* showing the stars */
+
+ 
+
+ .rate > label:before{  
+     display: inline-block;
+     font-size: 1.1rem;
+     font-family: FontAwesome;
+     content: "\f005";
+     padding: 0.3rem .2rem;
+     margin: 0;
+     cursor: pointer;
+ }
+
+ /* half star */
+ .rate .half :before {
+     content: "\f089";
+     position: absolute;
+     padding-right: 0;
+ }
+ 

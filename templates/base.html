@@ -1,0 +1,51 @@
+{% load static %}
+<!doctype html>
+<html lang="zxx">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Under Town</title>
+    <link rel="icon" href="{% static 'img/favicon1.png' %}">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <!-- animate CSS -->
+    <link rel="stylesheet" href="{% static 'css/animate.css' %}">
+    <!-- owl carousel CSS -->
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
+    <!-- nice select awesome CSS -->
+    <link rel="stylesheet" href="{% static 'css/nice-select.css' %}">
+    <!-- font awesome CSS -->
+    <link rel="stylesheet" href="{% static 'css/all.css' %}">
+    <!-- flaticon CSS -->
+    <link rel="stylesheet" href="{% static 'css/flaticon.css' %}">
+    <link rel="stylesheet" href="{% static 'css/themify-icons.css' %}">
+    <!-- font awesome CSS -->
+    <link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}">
+    <!-- swiper CSS -->
+    <link rel="stylesheet" href="{% static 'css/slick.css' %}">
+     <!-- custom CSS -->
+     <link rel="stylesheet" href="{% static 'css/custom.css' %}">
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- style CSS -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <!-- paypal js -->
+    <script src="https://www.paypal.com/sdk/js?client-id=AS8dCNHoBXvRYw9P0lz_yXEByDXiNPcgRWkcM5nTxR64-R58HqJ-MGPB0wQC6YiXf-wE_68dFp7WVw0_&currency=USD"></script>
+
+</head>
+
+<body>
+
+{% comment %} navbar {% endcomment %}
+{% include 'includes/navbar.html' %}
+
+    
+
+{% block content %}
+{% comment %} content {% endcomment %}
+{% endblock content %}
+
+{% comment %} footer {% endcomment %}
+{% include 'includes/footer.html' %}

@@ -1,0 +1,62 @@
+{% extends 'adminpanel/base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<!-- Begin Page Content -->
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">Store Table</h1>
+    <p class="mb-4">Store details</p>
+   
+<!-- DataTales Example -->
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Product Variation  -list</h6>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+
+                    <tr>
+                        <th>Product</th>
+                        <th>Variation Category</th>
+                        <th>Variation Value</th>
+                        <th>Is Active</th>
+                        <th><a href="{% url 'add_variations' %}" class="btn btn-dark"> add variation</a></th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    {% if variations %}
+                        {% for variation in variations%}
+                            <tr>
+                                <td>{{variation.product}}</td>
+                                <td>{{variation.variation_category}}</td>
+                                <td>{{variation.variation_value}}</td>
+                                <td>{{variation.is_active}}</td>
+                                <td>
+                                    <a href="{% url 'edit_variations' variation.id %}" class="btn btn-success" onclick="return confirm('Do you want Edit {{variation.product}} ! ,are you sure?')">Edit</a>
+                                    <a href="{% url 'delete_variatons' variation.id%}" class="btn btn-danger" onclick="return confirm('Do you want Edit {{variation.product}} ! ,are you sure?')">Delete</a>
+                                </td>
+                                
+
+                                
+                            </tr>
+                        {% endfor %}
+                    {% endif %}
+                    
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<!-- /.container-fluid -->
+</div>
+<!-- /.main end -->
+
+
+{% endblock content %}

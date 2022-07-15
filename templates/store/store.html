@@ -1,0 +1,308 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+ <!--================Home Banner Area =================-->
+    <!-- breadcrumb start-->
+    <section class="breadcrumb" style="background-image: url('static/img/breadcrumb/marvel_banner.png');">
+        <div class="container">
+            {% comment %} <img src="{% static 'img/breadcrumb/marvel_banner.png' %}" alt=""> {% endcomment %}
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="breadcrumb_iner">   
+                        <div class="breadcrumb_iner_item">
+                            <h2>Shop OnStore</h2>
+                            <p>Home <span>-</span> Shop Category</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- breadcrumb start-->
+
+    <!--================Category Product Area =================-->
+    <section class="cat_product_area section_padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="left_sidebar_area">
+                        <aside class="left_widgets p_filter_widgets">
+                            <div class="l_w_title">
+                                <h3>Browse Categories</h3>
+                            </div>
+                            <div class="widgets_inner">
+                                <ul class="list">
+                                    <li>
+                                        <a href="{% url 'store' %}">ALL</a>
+                                    </li>
+                                    {% for main_category in main %}
+                                       <li>
+                                            <div class="dropdown">
+                                                <a class="btn  dropdown-toggle" href="{{ main_category.get_url}}" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="true">
+                                                    {{main_category.main_category_name}}</a>
+                                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                                    {% for category in main_category.category_set.all%}
+                                                        <li>
+                                                            <a class='dropdown-item' href="{{category.get_url}}">{{category.category_name}}</a>
+                                                            <ul>
+                                                                {% for i in category.subcategory_set.all %}
+                                                                <li>
+                                                                    <a id="sub_dropdown" href="{{i.get_url}}">{{i.sub_category_name}}</li></a>
+                                                                {% endfor %}
+                                                            </ul>
+                                                        </li>
+                                                    {% endfor %}
+                                                </ul>
+                                            </div>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </aside>
+
+                        <aside class="left_widgets p_filter_widgets">
+                            <div class="l_w_title">
+                                <h3>Product filters</h3>
+                            </div>
+                            <div class="widgets_inner">
+                                <ul class="list"></ul>
+                                <aside class="left_widgets p_filter_widgets">
+                                <div class="l_w_title">
+                                    <h3>product filters</h3>
+                                </div>
+                                <div class="widgets_inner">
+
+                                <ul class="list">
+                                    <li>
+                                        <a href="#">Asus</a>
+                                    </li>
+                                    <li class="active">
+                                        <a href="#">Gionee</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Micromax</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Samsung</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            </div>
+                            </aside>
+                        </aside>
+
+                        <aside class="left_widgets p_filter_widgets">
+                            <div class="l_w_title">
+                                <h3>Color Filter</h3>
+                            </div>
+                            <div class="widgets_inner">
+                                <ul class="list">
+                                    <li>
+                                        <a href="#">Black</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Black Leather</a>
+                                    </li>
+                                    <li class="active">
+                                        <a href="#">Black with red</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Gold</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Spacegrey</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </aside>
+
+                        <aside class="left_widgets p_filter_widgets price_rangs_aside">
+                            <div class="l_w_title">
+                                <h3>Price Filter</h3>
+                            </div>
+                            <div class="widgets_inner">
+                                <div class="range_item">
+                                    <!-- <div id="slider-range"></div> -->
+                                    <input type="text" class="js-range-slider" value="" />
+                                    <div class="d-flex">
+                                        <div class="price_text">
+                                            <p>Price :</p>
+                                        </div>
+                                        <div class="price_value d-flex justify-content-center">
+                                            <input type="text" class="js-input-from" id="amount" readonly />
+                                            <span>to</span>
+                                            <input type="text" class="js-input-to" id="amount" readonly />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </aside>
+                    </div>
+                </div>
+                <div class="col-lg-9">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="product_top_bar d-flex justify-content-between align-items-center">
+                                <div class="single_product_menu">
+                                    <p><span>{{product_count}} </span> Product Found</p>
+                                </div>
+                                <div class="single_product_menu d-flex">
+                                    <h5>short by : </h5>
+                                    <select>
+                                        <option data-display="Select">name</option>
+                                        <option value="1">price</option>
+                                        <option value="2">product</option>
+                                    </select>
+                                </div>
+                                <div class="single_product_menu d-flex">
+                                    <h5>show :</h5>
+                                    <div class="top_pageniation">
+                                        <ul>
+                                            <li>1</li>
+                                            <li>2</li>
+                                            <li>3</li>
+                                        </ul>
+                                    </div>
+                                </div>
+<!-- single product menu >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>.....-->
+                                <div class="single_product_menu d-flex">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" placeholder="search"
+                                            aria-describedby="inputGroupPrepend">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="inputGroupPrepend"><i
+                                                    class="ti-search"></i></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+ {% comment %} product adding {% endcomment %}
+
+                    <div class="row align-items-center latest_product_inner">
+
+                        {% if products %}
+                            {% for product in products %}
+                                <div class="col-lg-4 col-sm-6">
+                                    <div class="single_product_item">
+                                        <a href="{{product.get_url}}"> <img src="{{product.product_image.url}}" alt=""></a>
+                                        
+                                        <div class="single_product_text">
+                                            <h3>{{product.brand}}</h3>
+                                            <a href="{{product.get_url}}"><h4>{{product.product_name}}</h4></a>
+                                            <h3>${{product.price}}.00</h3>
+                                            <a href="{{product.get_url}}" class="add_cart">view details</a>
+                                            <a href=""><i class="ti-heart"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        {% else %}
+                            <div class="text-center ">
+                                <h2 class=" text-danger">Oops...No result found ,try again</h2>
+                            </div>
+                        {% endif %}
+
+                        <div class="col-lg-12">
+                            <div class="pageination">
+                                <nav aria-label="Page navigation example">
+
+{% comment %}Product paginations  {% endcomment %}
+
+                                    {% if products.has_other_pages %}
+                                        <ul class="pagination justify-content-center">
+
+                                            {% if products.has_previous %}
+                                                <li class="page-item ">
+                                                    <a class="page-link" href="?page={{products.previous_page_number}}" aria-label="Previous">
+                                                        <i class="ti-angle-double-left"></i>
+                                                    </a>
+                                                </li>
+                                            {% else %}
+                                                <li class="page-item disable">
+                                                    <a class="page-link" href="#" aria-label="Previous">
+                                                        <i class="ti-angle-double-left"></i>
+                                                    </a>
+                                                </li>
+                                            {% endif %}
+
+                                            {% for i in products.paginator.page_range %}
+                                                {% if products.number == i %}
+                                                    <li class="page-item active"><a class="page-link" href="#">{{i}}</a></li>
+                                                {% else %}
+                                                    <li class="page-item"><a class="page-link" href="?page={{i}}">{{i}}</a></li>
+                                                {% endif %}
+                                            {% endfor %}
+
+                                            {% if products.has_next %}
+                                                <li class="page-item">
+                                                    <a class="page-link" href="?page={{products.next_page_number}}" aria-label="Next">
+                                                        <i class="ti-angle-double-right"></i>
+                                                    </a>
+                                                </li>
+                                            {% else %}
+                                                <li class="page-item disabled">
+                                                    <a class="page-link" href="#" aria-label="Next">
+                                                        <i class="ti-angle-double-right"></i>
+                                                    </a>
+                                                </li>
+                                            {% endif %}
+
+                                        </ul>
+                                    {% endif %}
+
+
+                                </nav>
+                            </div>
+                        </div>
+                        {% comment %} row end {% endcomment %}
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--================End Category Product Area =================-->
+
+    <!-- product_list part start-->
+    <section class="product_list best_seller">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-12">
+                    <div class="section_tittle text-center">
+                        <h2>Best Sellers <span>shop</span></h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row align-items-center justify-content-between">
+                <div class="col-lg-12">
+                    <div class="best_product_slider owl-carousel">
+
+                        {% if bestsellers %}
+                            {% for bestseller in bestsellers %}
+                                <div class="single_product_item">
+                                    <img src="{{bestseller.product.product_image.url}}" alt="">
+                                    <div class="single_product_text">
+                                        <h4></h4>{{bestseller.product.product_name}}
+                                        <h3>${{bestseller.product.price}}</h3>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- product_list part end-->
+
+
+{% endblock content %}
+
+
+
+

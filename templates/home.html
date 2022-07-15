@@ -1,0 +1,299 @@
+{% extends 'base.html' %}
+
+
+{% load static %}
+{% block content %}
+
+ {% comment %} <!-- banner part start-->
+ <section class="banner_part ">
+    <div class="container-fluid">
+        <div class="row align-items-center">
+            <div class="col-lg-12">
+                <div class="banner_slider owl-carousel  ">
+
+                    {% if carousels %}
+                        {% for carousel in carousels %}
+                            <div class="single_banner_slider  " >
+                                <div class="row">
+                                    <div class="col-lg-5 col-md-8">
+                                        <div class="banner_text  ">
+                                            <div class="banner_text_iner">
+                                                {{carousel.category.category_name}}
+                                                <h1 class="p-5">{{ carousel.title }}</h1>
+                                                <p>{{carousel.descreption}}</p>
+                                                <a href="{{carousel.category.get_url}}" class="btn_3">buy now</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="banner_img col-lg-8 p-5">
+                                        <img src="{{carousel.image.url}}" alt=""  style="height:100%; ">
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+
+                </div>
+                    <div class="slider-counter">srtyrytr </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- banner part start--> {% static 'img/banner/banner-bg.jpg' %}{% endcomment %}
+
+<!-- ========================= SECTION MAIN ========================= -->
+<section class="section-intro padding-sm px">
+<div class="container-fluid">
+    
+<div class="banner_slider owl-carousel">
+{% for carousel in carousels %}
+
+<div class="intro-banner-wrap text-center" style="margin-top:5%; height: 700px; overflow: hidden; position: relative; " >
+    
+    <a href="{{carousel.category.get_url}}"> 
+
+    <img src="{{carousel.image.url}}" class="img-fluid rounded" style="position: absolute;">
+    
+</a>
+</div>
+{% endfor %}
+
+</div>
+
+</div> <!-- container //  -->
+</section>
+<!-- ========================= SECTION MAIN END// ========================= -->
+
+
+
+<!-- product_list start-->
+<section class="product_list section_padding">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-12">
+                <div class="section_tittle text-center">
+                    <h2>Awesome <span>shop</span></h2>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="product_list_slider owl-carousel">
+                    <div class="single_product_list_slider">
+                        <div class="row align-items-center justify-content-between">
+
+                            {% if awesomes %}
+                                {% for awesome in awesomes  %}
+                                    <div class="col-lg-3 col-sm-6">
+                                        <div class="single_product_item">
+                                            <a href="{{awesome.product.get_url}}">
+                                                <img src="{{awesome.product.product_image.url}}" alt="">
+                                            </a>
+                                            <div class="single_product_text">
+                                                <h4>{{awesome.product.brand}}</h4>
+                                                <a href="{{awesome.product.get_url}}">
+                                                    <h3>{{awesome.product.product_name}}</h3>
+                                                </a>
+                                                <h3>${{awesome.product.price}}.00</h3>
+                                                <a href="" class="add_cart">+ add to cart<i class="ti-heart"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            {% endif %}
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- product_list part start-->
+
+<!-- feature_part start-->
+<section class="feature_part padding_top">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="section_tittle text-center">
+                    <h2>Featured Category</h2>
+                </div>
+            </div>
+        </div>
+        <div class="row align-items-center justify-content-between">
+            <div class="col-lg-7 col-sm-6">
+                <div class="single_feature_post_text">
+                    <img src="{% static 'img/for_home/for_home_feater1.png' %}" alt="">
+                    <p>Premium Quality</p>
+                    <h3>Latest Fashion</h3>
+                    <a href="#" class="feature_btn">EXPLORE NOW <i class="fas fa-play"></i></a>
+                </div>
+            </div>
+            <div class="col-lg-5 col-sm-6">
+                <div class="single_feature_post_text">
+                    <p>Premium Quality</p>
+                    <h3>Latest foam Sofa</h3>
+                    <a href="#" class="feature_btn">EXPLORE NOW <i class="fas fa-play"></i></a>
+                    <img src="{% static 'img/for_home/home.png' %}" alt="">
+                </div>
+            </div>
+            <div class="col-lg-5 col-sm-6">
+                <div class="single_feature_post_text">
+                    <p>Premium Quality</p>
+                    <h3>Latest foam Sofa</h3>
+                    <a href="#" class="feature_btn">EXPLORE NOW <i class="fas fa-play"></i></a>
+                    <img src="{% static 'img/feature/feature_3.png' %}" alt="">
+                </div>
+            </div>
+            <div class="col-lg-7 col-sm-6">
+                <div class="single_feature_post_text">
+                    <img src="{% static 'img/feature/feature_4.png' %}" alt="">
+                    <p>Premium Quality</p>
+                    <h3>Latest foam Sofa</h3>
+                    <a href="#" class="feature_btn">EXPLORE NOW <i class="fas fa-play"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- upcoming_event part start--> 
+
+<!-- awesome_shop start-->
+<section class="our_offer section_padding">
+    <div class="container">
+        <div class="row align-items-center justify-content-between">
+            <div class="col-lg-6 col-md-6">
+                <div class="offer_img">
+                    <img src="{% static 'img/for_home/for.count.png' %}" alt="">
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6">
+                <div class="offer_text">
+                    <h2>Weekly Sale on
+                        60% Off All Products</h2>
+                    <div class="date_countdown">
+                        <div id="timer">
+                            <div id="days" class="date"></div>
+                            <div id="hours" class="date"></div>
+                            <div id="minutes" class="date"></div>
+                            <div id="seconds" class="date"></div>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="enter email address"
+                            aria-label="Recipient's username" aria-describedby="basic-addon2">
+                        <div class="input-group-append">
+                            <a href="#" class="input-group-text btn_2" id="basic-addon2">book now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- awesome_shop part start-->
+
+ 
+
+<!-- product_list part start-->
+<section class="product_list best_seller section_padding">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-12">
+                <div class="section_tittle text-center">
+                    <h2>Best Sellers <span>shop</span></h2>
+                </div>
+            </div>
+        </div>
+        <div class="row align-items-center justify-content-between">
+            <div class="col-lg-12">
+                <div class="best_product_slider owl-carousel">
+
+                    {% if bestsellers %}
+                        {% for bestseller in bestsellers %}
+                            <div class="single_product_item">
+                                <img src="{{bestseller.product.product_image.url}}" alt="">
+                                <div class="single_product_text">
+                                    <h4></h4>{{bestseller.product.product_name}}
+                                    <h3>${{bestseller.product.price}}</h3>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- product_list part end-->
+
+<!-- subscribe_area part start-->
+<section class="subscribe_area section_padding">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-7">
+                <div class="subscribe_area_text text-center">
+                    <h5>Join Our Newsletter</h5>
+                    <h2>Subscribe to get Updated
+                        with new offers</h2>
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="enter email address"
+                            aria-label="Recipient's username" aria-describedby="basic-addon2">
+                        <div class="input-group-append">
+                            <a href="#" class="input-group-text btn_2" id="basic-addon2">subscribe now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--::subscribe_area part end::-->
+
+<!-- subscribe_area part start-->
+<section class="client_logo padding_top">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-12">
+                <div class="single_client_logo">
+                    <img src="{% static 'img/client_logo/allen_solly.client.png' %}" alt="">
+                </div>
+                <div class="single_client_logo">
+                    <img src="{% static 'img/client_logo/calvin.klein.client.png' %}" alt="">
+                </div>
+                <div class="single_client_logo">
+                    <img src="{% static 'img/client_logo/uspa.client.png' %}" alt="">
+                </div>
+                <div class="single_client_logo">
+                    <img src="{% static 'img/client_logo/allen_solly.client.png' %}" alt="">
+                </div>
+                <div class="single_client_logo">
+                    <img src="{% static 'img/client_logo/calvin.klein.client.png' %}" alt="">
+                </div>
+                <div class="single_client_logo">
+                    <img src="{% static 'img/client_logo/allen_solly.client.png' %}" alt="">
+                </div>
+                <div class="single_client_logo">
+                    <img src="{% static 'img/client_logo/calvin.klein.client.png' %}" alt="">
+                </div>
+                <div class="single_client_logo">
+                    <img src="{% static 'img/client_logo/uspa.client.png' %}" alt="">
+                </div>
+                <div class="single_client_logo">
+                    <img src="{% static 'img/client_logo/allen_solly.client.png' %}" alt="">
+                </div>
+                <div class="single_client_logo">
+                    <img src="{% static 'img/client_logo/calvin.klein.client.png' %}" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--::subscribe_area part end::-->{% endblock content%}
+
+
+
+

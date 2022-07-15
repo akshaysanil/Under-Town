@@ -1,0 +1,67 @@
+{% extends 'adminpanel/base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<!-- Begin Page Content -->
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">Store Products Table</h1>
+    <p class="mb-4">Store details</p>
+
+   
+<!-- DataTales Example -->
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Order Product -list</h6>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+
+                    <tr>
+                        <th>Product name</th>
+                        <th>Brand</th>
+                        <th>Price</th>
+                        <th>Stock</th>
+                        <th>Category Relation</th>
+                        <th>Modified Date </th>
+                        <th>Is Available</th>
+                        <th class="text-center"><a href="{% url 'add_product' %}" class="btn btn-dark">Add New </a></th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    {% if products %}
+                        {% for product in products %}
+                            <tr>
+                                <td>{{product.product_name}}</td>
+                                <td>{{product.brand}}</td>
+                                <td>$ {{product.price}}</td>
+                                <td>{{product.stock}}</td>
+                                <td>{{product.sub_category}}</td>
+                                <td>{{product.modified_date}}</td>
+                                <td>{{product.is_available}}</td>
+                                <td class="text-center">
+                                    <a href="{% url 'edit_product' product.id %}" class="btn btn-success" onclick="return confirm('Do you want Edit {{product.product_name}} ! ,are you sure?')">Edit</a> 
+                                    <a href="{% url 'delete_product' product.id %}" class="btn btn-danger" onclick="return confirm('Do you want Delete {{product.product_name}} ! ,are you sure?')">Delete </a> 
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    {% endif %}
+                    
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<!-- /.container-fluid -->
+</div>
+<!-- /.main end -->
+
+
+{% endblock content %}

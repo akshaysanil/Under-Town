@@ -1,0 +1,54 @@
+
+{% extends 'adminpanel/base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="card m-3">
+    <h5 class="card-header">Add Variation</h5>
+    <form action="" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+      
+        <div class="card-body">
+            <div class="mb-3 row">
+                <label for="exampleFormControlSelect1" class="col-md-2 col-form-label">Product name </label>
+                <div class="col-md-10">
+                    {{form.product}}
+                </div>
+            </div>
+
+            <div class="mb-3 row">
+                <label for="exampleFormControlTextarea1" class="col-md-2 col-form-label">Variation Category</label>
+                <div class="col-md-10">
+                    {{form.variation_category}}
+                </div>
+            </div>
+
+            <div class="mb-3 row">
+                <label for="exampleFormControlSelect1" class="col-md-2 col-form-label">Variation value</label>
+                <div class="col-md-10">
+                    {{form.variation_value}}
+                </div>
+            </div>
+
+            <div class="mb-3 row">
+                <label for="exampleFormControlTextarea1" class="col-md-2 col-form-label">Is Active</label>
+                <div class="col-md-10">
+                    {{form.is_active}}
+                </div>
+            </div>
+
+
+            <div class="d-flex justify-content-end">
+                <a href="" class="btn btn-outline-danger"
+                onclick="return confirm('Are you sure ? current modifications will be unsaved.')">Back</a>
+                <div class="px-2"></div>
+                <button type="submit" class="btn btn-outline-primary"
+                onclick="return confirm('confirm Save')">Save</button>
+            </div>
+            
+        </div>
+    </form>
+</div>
+<!-- / Content -->
+ {% endblock content %}
+               

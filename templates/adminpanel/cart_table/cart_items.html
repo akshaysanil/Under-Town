@@ -1,0 +1,63 @@
+{% extends 'adminpanel/base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<!-- Begin Page Content -->
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800"> Cart Table</h1>
+    <p class="mb-4">Cart details</p>
+
+
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Carts Item-lists </h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Product</th>
+                            <th>Cart</th>
+                            <th>Quantity</th>
+                            <th>Is Active</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>Product</th>
+                            <th>Cart</th>
+                            <th>Quantity</th>
+                            <th>Is Active</th>   
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        
+                        {% if cart_items %}
+                            {% for cart_item in cart_items %}
+                                <tr>
+                                    <td>{{cart_item.product}}</td>
+                                    <td>{{cart_item.cart}}</td>
+                                    <td>{{cart_item.quantity}}</td>
+                                    <td>{{cart_item.is_active}}</td>
+                                </tr>
+                            {% endfor %}
+                        {% endif %}
+                        
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!-- /.container-fluid -->
+
+</div>
+<!-- End of Main Content -->
+
+
+{% endblock content %}
