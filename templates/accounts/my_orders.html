@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+<!-- ========================= SECTION CONTENT ========================= -->
+<section class="cart_area padding_top">
+    <div class="container">
+        <div class="row">
+        
+            {% include 'includes/dashboard_sidebar.html' %}
+
+        <main class="col-md-9">
+            <article class="card">
+            <header class="card-header">
+                <strong class="d-inline-block mr-3">Your order history</strong>
+            </header>
+
+            <div class="card-body" style="text-align:center;">
+                <div class="row"> 
+
+                    <div class="col-md-12">
+
+                        <table class="table table-info table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Order</th>
+                                    <th>Billing Name</th>
+                                    <th>Phone</th>
+                                    <th>Order total</th>
+                                    <th>Date</th>
+                                </tr>
+                            </thead>
+                            
+                            <tbody>
+                                
+                                {% for order in orders %}
+                                <tr>
+                                    <td><a href="">{{order.order_number}}</a> </td>
+                                    <td>{{order.full_name}}</td>
+                                    <td>{{order.phone}}</td>
+                                    <td>{{order.order_total}}</td>
+                                    <td>{{order.created_at}}</td>
+                                </tr>
+                                {% endfor %}
+                                    
+                                
+                            </tbody>
+                           
+                        </table>
+                        
+                    </div>
+
+                </div> <!-- row.// -->
+            </div> <!-- card-body .// -->
+            <div class="table-responsive">
+            
+
+
+            </div> <!-- table-responsive .end// -->
+            </article> <!-- order-group.// --> 
+        </main>
+    </div> <!-- row.// -->
+    </div>
+    
+    
+    </section>
+    <!-- ========================= SECTION CONTENT END// ========================= -->
+
+
+{% endblock content %}
+
+
+
+
+

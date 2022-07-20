@@ -1,6 +1,6 @@
 
 from django.db import models
-from accounts.views import Account
+from accounts.models import Account
 from store.models import Product, Variation
 
 # Create your models here.

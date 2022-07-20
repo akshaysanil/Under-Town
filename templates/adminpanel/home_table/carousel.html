@@ -50,8 +50,8 @@
                                     <a href="{% url 'caraousel_available' carousel.id %}" class="btn btn-warning">Available</a>
                           
 
-                                    <a href="{% url 'edit_carousel' carousel.id %}" class="btn btn-success" nclick="return confirm('Do you want Edit {{carousel.category}} ! ,are you sure?')">Edit</a>
-                                    <a href="" class="btn btn-danger" nclick="return confirm('Do you want Edit  ! ,are you sure?')"> Delete</a>
+                                    <a href="{% url 'edit_carousel' carousel.id %}" class="btn btn-success" onclick="return confirm('Do you want Edit {{carousel.category}} ! ,are you sure?')">Edit</a>
+                                    <a href="{% url 'delete_carousel' carousel.id%}" class="btn btn-danger" onclick="return confirm('Do you want Edit {{carousel.category}} ! ,are you sure?')"> Delete</a>
                                 </td>
 
                                 

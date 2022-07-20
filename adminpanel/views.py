@@ -7,7 +7,7 @@ from category.forms import MainCategoryForm,CategoryForm,SubCategoryForm
 from category.models import MainCategory,SubCategory,Category
 from orders.models import Order, OrderProduct, Payment
 from store.forms import ProductForm, VariationForm
-from store.models import BestSellers, Carousel, Product, Variation
+from store.models import BestSellers, Carousel, Product, ProductGallery, Variation
 from home.models import Awesome
 from home.forms import CarouselForm
 from django.template.defaultfilters import slugify
@@ -292,6 +292,7 @@ def store_table(request,id):
 def add_product(request):
     if request.user.is_superadmin:
         form = ProductForm()
+        more_images = ProductGallery.objects.all()
         if request.method == 'POST':
             form = ProductForm(request.POST,request.FILES)
             print(form)
@@ -307,6 +308,7 @@ def add_product(request):
             form = ProductForm()
         context = {
             'form' : form,
+            'more_images' :more_images,
         }
         return render(request,'adminpanel/store_table/add_product.html',context)
     else:
@@ -456,6 +458,14 @@ def caraousel_available(request,id):
         carousel           = Carousel.objects.get(id=id)
         carousel.is_available = True
         carousel.save()
+        return redirect('home_table',id=1)
+    else:
+        return redirect ('home')
+
+def delete_carousel(request,id):
+    if request.user.is_superadmin:
+        carousel = Carousel.objects.get(id=id)
+        carousel.delete()
         return redirect('home_table',id=1)
     else:
         return redirect ('home')

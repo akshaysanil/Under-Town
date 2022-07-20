@@ -4,7 +4,7 @@ from .import views
 
 urlpatterns = [
     path('',views.adminpanel,name="adminpanel"),
-    # path('admin_login/',views.admin_login,name="admin_login"),
+    
     path('user_accounts_table/<int:id>',views.user_accounts_table,name="user_accounts_table"),
     path('cart_table/<int:id>',views.cart_table,name="cart_table"),
     path('category_table/<int:id>/',views.category_table,name="category_table"),
@@ -39,15 +39,7 @@ urlpatterns = [
     path('edit_carousel/<int:id>/',views.edit_carousel,name='edit_carousel'),
     path('carousel_not_available/<int:id>/',views.carousel_not_available,name="carousel_not_available"),
     path('caraousel_available/<int:id>/',views.caraousel_available,name='caraousel_available'),
-    
-
-
-
-
-
-
-    
-
+    path('delete_carousel/<int:id>/',views.delete_carousel,name="delete_carousel"),
 
     
 ]

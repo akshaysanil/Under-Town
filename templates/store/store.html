@@ -37,6 +37,7 @@
                                     <li>
                                         <a href="{% url 'store' %}">ALL</a>
                                     </li>
+
                                     {% for main_category in main %}
                                        <li>
                                             <div class="dropdown">
@@ -58,6 +59,7 @@
                                             </div>
                                         </li>
                                     {% endfor %}
+                                    
                                 </ul>
                             </div>
                         </aside>
@@ -195,7 +197,7 @@
                                             <a href="{{product.get_url}}"><h4>{{product.product_name}}</h4></a>
                                             <h3>${{product.price}}.00</h3>
                                             <a href="{{product.get_url}}" class="add_cart">view details</a>
-                                            <a href=""><i class="ti-heart"></i></a>
+                                            <a href="{% url 'add_wishlist' product.id%}"><i class="ti-heart"></i></a>
                                         </div>
                                     </div>
                                 </div>

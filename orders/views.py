@@ -3,7 +3,7 @@ from django.http import JsonResponse
 from django.shortcuts import redirect, render
 from cart.models import Cart, CartItem
 from orders.forms import OrderForm
-from orders.models import Order, OrderProduct, Payment
+from .models import Order, OrderProduct, Payment
 import datetime
 from store.models import Product
 import json

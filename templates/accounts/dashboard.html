@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+<!-- ========================= SECTION CONTENT ========================= -->
+<section class="cart_area padding_top">
+    <div class="container">
+        <div class="row">
+        
+            {% include 'includes/dashboard_sidebar.html' %}
+
+        <main class="col-md-9">
+            <article class="card">
+            <header class="card-header">
+                <strong class="d-inline-block mr-3">Logged in as : </strong>
+                <span>{{user.full_name}}</span>
+            </header>
+            <div class="card-body" style="text-align:center;">
+                <div class="row"> 
+                    
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title"> Total orders</h5>
+                                <h4>{{orders_count}}</h4>
+                                <a href="{% url 'my_orders' %}">View orders</a>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-body " style="text-align:center;">
+                                <img src="{{userprofile.profile_picture.url}}" alt="user photo" 
+                                style=" width: 50px;
+                                height: 50px;
+                                border-radius: 50%;
+                                vertical-align: middle;">
+                                <p >{{user.email}}</p>
+                                <p>{{user.phone_no}}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div> <!-- row.// -->
+            </div> <!-- card-body .// -->
+            <div class="table-responsive">
+            
+
+
+            </div> <!-- table-responsive .end// -->
+            </article> <!-- order-group.// --> 
+        </main>
+    </div> <!-- row.// -->
+    </div>
+    
+    
+    </section>
+    <!-- ========================= SECTION CONTENT END// ========================= -->
+
+
+{% endblock content %}
+
+
+
+
+
