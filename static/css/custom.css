@@ -4,7 +4,7 @@
  }
 
  .rate {
-     display: inline-block;
+     display:inline-block;
      border: 0;
  }
  .rate > label{
@@ -14,7 +14,7 @@
  
 
  .rate > label:before{  
-     display: inline-block;
+     display:inline-block;
      font-size: 1.1rem;
      font-family: FontAwesome;
      content: "\f005";
@@ -24,9 +24,18 @@
  }
 
  /* half star */
- .rate .half :before {
+ .rate .half:before {
      content: "\f089";
      position: absolute;
      padding-right: 0;
  }
- 
+
+ input:checked ~ label ,label:hover ~ label{
+     color: #ffb503;
+ }
+
+ /* hover highlighted */
+ input:checked + label:hover , input:checked ~ label:hover, input:checked ~ label:hover ~ label,
+ label:hover ~ input:checked ~ label{
+     color: #cc9000;
+ }
