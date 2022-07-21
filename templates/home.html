@@ -214,7 +214,9 @@
                     {% if bestsellers %}
                         {% for bestseller in bestsellers %}
                             <div class="single_product_item">
+                                <a href="{{bestseller.product.get_url}}">
                                 <img src="{{bestseller.product.product_image.url}}" alt="">
+                                </a>
                                 <div class="single_product_text">
                                     <h4></h4>{{bestseller.product.product_name}}
                                     <h3>${{bestseller.product.price}}</h3>
