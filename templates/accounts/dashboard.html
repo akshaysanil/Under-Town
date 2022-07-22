@@ -33,7 +33,11 @@
                     <div class="col-md-6">
                         <div class="card">
                             <div class="card-body " style="text-align:center;">
-                                <img src="{{userprofile.profile_picture.url}}" alt="user photo" 
+                                <img
+                                {% if userprofile.profile_picture %}
+                                 src="{{userprofile.profile_picture.url}}" 
+                                {% endif %}
+                                alt="user photo" 
                                 style=" width: 50px;
                                 height: 50px;
                                 border-radius: 50%;

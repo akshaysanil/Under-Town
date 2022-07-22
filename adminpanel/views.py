@@ -292,7 +292,6 @@ def store_table(request,id):
 def add_product(request):
     if request.user.is_superadmin:
         form = ProductForm()
-        more_images = ProductGallery.objects.all()
         if request.method == 'POST':
             form = ProductForm(request.POST,request.FILES)
             print(form)
@@ -301,14 +300,19 @@ def add_product(request):
                 product_name = form.cleaned_data['product_name']
                 slug = slugify(product_name)
                 product.product_slug = slug
-
                 product.save()
+
+                images = request.FILES.getlist('images')
+                for image in images:
+                    ProductGallery.objects.create(
+                        image = image,
+                        product = product,
+                    )
                 return redirect('store_table',id=1)
         else:
             form = ProductForm()
         context = {
             'form' : form,
-            'more_images' :more_images,
         }
         return render(request,'adminpanel/store_table/add_product.html',context)
     else:
@@ -317,6 +321,7 @@ def add_product(request):
 def edit_product(request,id):
     if request.user.is_superadmin:
         product = Product.objects.get(id=id)
+        more_images = ProductGallery.objects.filter(product=product)
         if request.method =='POST':
             form = ProductForm(request.POST,request.FILES,instance=product)
             if form.is_valid():
@@ -325,11 +330,22 @@ def edit_product(request,id):
                 product = form.save()
                 product.product_slug = slug
                 product.save()
+
+                images = request.FILES.getlist('images')
+                for image in images:
+                    ProductGallery.objects.create(
+                        image = image,
+                        product = product,
+                    )
+                
+
                 return redirect('store_table',id=1)
         else:
             form = ProductForm(instance=product)
         context = {
             'form' : form,
+            'more_images' :more_images,
+
         }
         return render (request,'adminpanel/store_table/add_product.html',context)
     else:

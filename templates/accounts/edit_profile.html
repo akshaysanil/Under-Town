@@ -18,7 +18,13 @@
 
             <div class="card-body" >
                 <div class="text-right">
-                    <img src="{{userprofile.profile_picture.url}}" alt="profile Picture" width="100 " style="border-radius:50px;">
+                    <img
+                    {% if userprofile.profile_picture %}
+                    src="{{userprofile.profile_picture.url}}" 
+                    {% endif %}
+                     alt="profile Picture" 
+                     width="100 " 
+                     style="border-radius:50px;">
                 </div>
 
                 <div class="row"> 
