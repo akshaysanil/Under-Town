@@ -322,6 +322,7 @@ def edit_product(request,id):
     if request.user.is_superadmin:
         product = Product.objects.get(id=id)
         more_images = ProductGallery.objects.filter(product=product)
+        print('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',more_images)
         if request.method =='POST':
             form = ProductForm(request.POST,request.FILES,instance=product)
             if form.is_valid():
