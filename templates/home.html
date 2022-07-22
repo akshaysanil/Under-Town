@@ -96,7 +96,9 @@
                                                     <h3>{{awesome.product.product_name}}</h3>
                                                 </a>
                                                 <h3>${{awesome.product.price}}.00</h3>
-                                                <a href="" class="add_cart">+ add to cart<i class="ti-heart"></i></a>
+                                                <a href="{{awesome.product.get_url}}" class="add_cart">View Detail</a>
+                                                <a href="{% url 'add_wishlist' awesome.product.id %}" class="add_cart"><i class="fa-solid fa-heart-circle-plus"></i></a>
+
                                             </div>
                                         </div>
                                     </div>
