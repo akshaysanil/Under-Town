@@ -112,33 +112,42 @@
         </div>
     </div>
 </section>
-<!-- product_list part start-->
 
-<!-- feature_part start-->
-<section class="feature_part padding_top">
+<!-- Start category Area -->
+<section class="category-area">
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-lg-8">
-                <div class="section_tittle text-center">
-                    <h2>Featured Category</h2>
-                </div>
-            </div>
-        </div>
-        <div class="row align-items-center justify-content-between">
-            
-            <div class="col-lg-6 col-sm-6">
-                <div class="single_feature_post_text">
-                    <img src="{% static 'img/for_home/for_home_feater1.png' %}" alt="">
-                    <p>Premium Quality</p>
-                    <h3>Latest Fashion</h3>
-                    <a href="#" class="feature_btn">EXPLORE NOW <i class="fas fa-play"></i></a>
+            <div class="col-lg-12 col-md-12">
+                <div class="row">
+
+                    {% if category %}
+                    {% for cat  in category %}
+                    <div class="col-lg-6 col-md-6">
+                        <div class="single-deal">
+                            <div class="overlay"></div>
+                            <a href="{{cat.get_url}}">
+                                <img class="img-fluid w-100" src="{{cat.image.url}}" alt="category section">
+                            </a>
+                            <a href="img/category/c1.jpg" class="img-pop-up" target="_blank">
+                                <div class="deal-details">
+                                    <h6 class="deal-title">{{cat.description}}</h6>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+                    
                 </div>
             </div>
             
         </div>
     </div>
 </section>
-<!-- upcoming_event part start--> 
+<!-- End category Area -->
+
+
+
 
 <!-- awesome_shop start-->
 <section class="our_offer section_padding">
@@ -165,7 +174,7 @@
                         <input type="text" class="form-control" placeholder="enter email address"
                             aria-label="Recipient's username" aria-describedby="basic-addon2">
                         <div class="input-group-append">
-                            <a href="#" class="input-group-text btn_2" id="basic-addon2">book now</a>
+                            <a href="{% url 'store' %}" class="input-group-text btn_2" id="basic-addon2">book now</a>
                         </div>
                     </div>
                 </div>
@@ -174,6 +183,8 @@
     </div>
 </section>
 <!-- awesome_shop part start-->
+
+
 
  
 

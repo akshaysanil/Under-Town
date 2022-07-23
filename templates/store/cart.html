@@ -78,33 +78,36 @@
 <!--cart Quantity minus and plus option-->   
  
                   <td>
-                    <div class="product_count">
-                      <a href="{% url 'remove_cart' cart_item.product.id cart_item.id%}">
-                        <span  class="input-number-decrement">
-                          <i class="ti-angle-down"></i>
-                        </span>
-                      </a>
-
-                      <input class="input-number" type="text" value="{{cart_item.quantity}}" min="0" max="">
-
-                      <form action="{% url 'add_cart' cart_item.product.id  %}" method="POST">
-                        {% csrf_token %}
-                        {% for item in cart_item.variations.all %}
-                          <input type="hidden" name="{{item.variation_category | lower}}" value="{{item.variation_value | capfirst}}">
-                        {% endfor %}
-                          <button type="submit" class="btn btn-dark "><i class="ti-angle-up" ></i></span></button>
-                    </form>
+                    <div class="product_count d-flex justify-content-center">
+                      <div>
+                        <a href="{% url 'remove_cart' cart_item.product.id cart_item.id%}" type="button" class="fa-solid fa-circle-chevron-down btn"></a>
+                      </div>
+                      <div> 
+                        <p>{{cart_item.quantity}}</p>
+                      </div>
+                      <div class="input-group-append">
+                        <form action="{% url 'add_cart' cart_item.product.id  %}" method="POST">
+                          {% csrf_token %}
+                          {% for item in cart_item.variations.all %}
+                            <input type="hidden" name="{{item.variation_category | lower}}" value="{{item.variation_value | capfirst}}">
+                          {% endfor %}
+                            <button type="submit" class="fa-solid fa-circle-chevron-up btn"></button>
+                        </form>
+                      </div>
                     </div>
                   </td>
-                  <td class="text-right">
-                    <a href="{% url 'remove_cart_item' cart_item.product.id cart_item.id%}" class="btn_1">remove</a>
-                  </td>
+                  
                   <td>
                     <h5>${{cart_item.sub_total}}.00</h5>
+                  </td>
+                  <td class="text-right">
+                    <a href="{% url 'remove_cart_item' cart_item.product.id cart_item.id%}" class="btn btn-danger">remove</a>
                   </td>
                 </tr>
               {% endfor %}
               <tr>
+                <td></td>
+                <td></td>
                 <td></td>
                 <td></td>
                 <td>
@@ -115,12 +118,16 @@
               <tr>
                 <td></td>
                 <td></td>
+                <td></td>
+                <td></td>
                 <td>
                   <h5>Tax</h5>
                   <h5>${{tax}}.00</h5>
                 </td>
               </tr>
               <tr>
+                <td></td>
+                <td></td>
                 <td></td>
                 <td></td>
                 <td>

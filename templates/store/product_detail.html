@@ -86,7 +86,7 @@
 
                   <div class="item-option-select " >
                     <h6>Choose Color</h6>
-                    <select class="btn-group btn-group-sm btn-group-toggle form-select" aria-label="Default select" data-toggle="buttons" name="color">
+                    <select class="btn-group btn-group-sm btn-group-toggle form-select" aria-label="Default select" data-toggle="buttons" name="color" required>
                       <option value="" disabled selected>choose color</option>
                       {% for i in single_product.variation_set.colors %}
                       <label class="btn btn-light">
@@ -106,7 +106,7 @@
                 <div class="row">
                   <div class="item-option-select">
                     <h6>Select Size</h6>
-                    <select class="btn-group btn-group-sm btn-group-toggle form-select" aria-label="Default select" data-toggle="buttons" name="size">
+                    <select class="btn-group btn-group-sm btn-group-toggle form-select" aria-label="Default select" data-toggle="buttons" name="size" required>
                       <option value="" disabled selected>choose size</option>
                       {% for i in single_product.variation_set.sizes %}
                       <label class="btn btn-light">
