@@ -74,7 +74,7 @@
                 </tr>
              {% endfor %}
              
-              <tr class="bottom_button">
+              {% comment %} <tr class="bottom_button">
                 <td></td>
                 <td></td>
                 <td>
@@ -82,14 +82,14 @@
                     <a class="btn_1" href="#">Add To Cart</a>
                   </div>
                 </td>
-              </tr>
+              </tr> {% endcomment %}
               
             </tbody>
           </table>
-          <div class="checkout_btn_inner float-right">
+          {% comment %} <div class="checkout_btn_inner float-right">
             <a class="btn_1" href="{% url 'store' %}">Continue Shopping</a>
             <a class="btn_1 checkout_btn_1" href="#">Proceed to checkout</a>
-          </div>
+          </div> {% endcomment %}
         </div>
       </div>
   </section>

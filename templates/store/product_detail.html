@@ -55,8 +55,7 @@
             {% csrf_token %}
               <article class="content-body ">
                 <div class="s_product_text">
-                  <h5>previous <span>|</span> next</h5>
-                  <h3>{{single_product.brand}}</h3>
+                              <h3>{{single_product.brand}}</h3>
                   <h3>{{single_product.product_name}}</h3>   
                   <h2>${{single_product.price}}.00</h2>
                   <ul class="list">
@@ -130,7 +129,10 @@
                       {% else %}
                         <button type="submit" class="btn_3 ">add to cart</button>
                         {% endif %}
-                        <a href="{% url 'add_wishlist' single_product.id  %}" class="like_us"> <i class="fa-solid fa-heart"></i> </a>
+                        {% comment %} <a href="{% url 'add_wishlist' single_product.id  %}" class="btn btn-danger"> <i class="fa-solid fa-heart"></i> </a> {% endcomment %}
+                        <a href="{% url 'add_wishlist' single_product.id  %}" class="btn_3 ">
+                           <i class="fa-solid fa-heart"></i>
+                        </a>
 
                   </div>
                 </div>    
@@ -555,38 +557,8 @@
                       <p>you must be logged in to post this review <span><a href="{% url 'login' %}"> -login now</a></span></p>
                       {% endif %}
 
-
-                      
-
                     </div>
 
-
-
-                    {% comment %} <div class="col-md-12">
-                      <div class="form-group">
-                        <input type="text" class="form-control" name="name" placeholder="Your Full name" />
-                      </div>
-                    </div>
-                    <div class="col-md-12">
-                      <div class="form-group">
-                        <input type="email" class="form-control" name="email" placeholder="Email Address" />
-                      </div>
-                    </div>
-                    <div class="col-md-12">
-                      <div class="form-group">
-                        <input type="text" class="form-control" name="number" placeholder="Phone Number" />
-                      </div>
-                    </div>
-                    <div class="col-md-12">
-                      <div class="form-group">
-                        <textarea class="form-control" name="message" rows="1" placeholder="Review"></textarea>
-                      </div>
-                    </div>
-                    <div class="col-md-12 text-right">
-                      <button type="submit" value="submit" class="btn_3">
-                        Submit Now
-                      </button>
-                    </div> {% endcomment %}
                     <div>
                       {% include 'includes/alert.html'   %}
 
