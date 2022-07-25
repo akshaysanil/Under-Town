@@ -1,4 +1,4 @@
-from multiprocessing import reduction
+from multiprocessing import context, reduction
 from django.contrib import messages
 from django.shortcuts import redirect, render
 from accounts.models import Account
@@ -11,6 +11,7 @@ from store.models import BestSellers, Carousel, Product, ProductGallery, Variati
 from home.models import Awesome
 from home.forms import CarouselForm
 from django.template.defaultfilters import slugify
+from django.db.models import Sum
 
 from django.core.paginator import EmptyPage,PageNotAnInteger,Paginator
 
@@ -494,6 +495,16 @@ def delete_carousel(request,id):
 
 def adminpanel(request):
     if request.user.is_superadmin:
-        return render (request,'adminpanel/adminpanel.html')
+        total_revenue = Order.objects.filter(is_ordered = True).aggregate(sum = Sum('order_total',))['sum']
+
+        total_cost= (total_revenue * .80)
+        total_profit = (total_revenue - total_cost)  
+
+        context = {
+            'total_revenue' : total_revenue,
+            'total_cost' : total_cost,
+            'total_profit' : total_profit,
+        }
+        return render (request,'adminpanel/adminpanel.html',context)
     else:
         return redirect('home')
