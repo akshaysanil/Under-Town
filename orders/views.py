@@ -10,7 +10,6 @@ import json
 from django.core.mail import EmailMessage
 from django.template.loader import render_to_string
 
-
 # Create your views here.
 
 def payments(request):
@@ -30,10 +29,8 @@ def payments(request):
     order.payment = payment
     order.is_ordered = True
     order.save()
-
     # move the cart items to Order product table
     cart_items = CartItem.objects.filter(user=request.user)
-
     for item in cart_items:
         orderproduct = OrderProduct()
         orderproduct.order_id = order.id
@@ -76,7 +73,6 @@ def payments(request):
 
     }
     return JsonResponse(data)
-
 
 
 def place_order(request ,total=0,quantity=0):
@@ -138,7 +134,6 @@ def place_order(request ,total=0,quantity=0):
 
             }
             return render(request, 'orders/payments.html',context)
-            
     else:
         return redirect ('checkout')
 

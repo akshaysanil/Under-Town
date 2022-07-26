@@ -1,6 +1,7 @@
 
 
 from itertools import product
+from multiprocessing import context
 from django.shortcuts import get_object_or_404, redirect, render
 from cart.models import CartItem
 from cart.views import _cart_id
@@ -105,9 +106,13 @@ def product_detail(
     except Exception as e:
         raise e
 
+    try:
+        orderproduct = OrderProduct.objects.filter(user=request.user,product_id=single_product.id).exists()
+    except OrderProduct.DoesNotExist:
+        orderproduct = None
+
+    reviews = ReviewRating.objects.filter(product_id=single_product.id,status=True)
     product_gallery = ProductGallery.objects.filter(product = single_product)
-
-
     bestsellers = BestSellers.objects.all().filter(is_best =True)
     
     context = {
@@ -115,8 +120,8 @@ def product_detail(
         'in_cart' : in_cart,
         'bestsellers' : bestsellers,
         'product_gallery' : product_gallery,
-        
-
+        'orderproduct' : orderproduct,
+        'reviews' : reviews,
     }
     return render(request,'store/product_detail.html',context)
 
@@ -164,12 +169,18 @@ def submit_review(request,product_id):
                 data.subject = form.cleaned_data['subject']
                 data.rating = form.cleaned_data['rating']
                 data.review = form.cleaned_data['review']
+                rating = data.ratiing
                 data.ip = request.META.get('REMOTE_ADDR')
                 data.product_id = product_id
                 data.user_id = request.user.id
                 data.save()
                 messages.success(request,'Thank you... Your review has been updated..')
-                return redirect (url)
+                context = {
+                    "rating" : rating,
+                    
+
+                }
+                return redirect (url,context)
 
 
 

@@ -1,6 +1,4 @@
 
-from itertools import product
-from tabnanny import verbose
 from django.db import models
 from category.models import MainCategory,SubCategory,Category
 from django.urls import reverse
