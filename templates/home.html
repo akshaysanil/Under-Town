@@ -21,9 +21,9 @@
 
             {% for carousel in carousels %}
             <div class="carousel-item active">
-
-                <img src="{{carousel.banner_image.url}}
-                " class="d-block w-100" alt="Banner">
+                <a href="{{carousel.category.get_url}}">
+                    <img src="{{carousel.banner_image.url}}" class="d-block w-100" alt="Banner">
+                </a>
                 <div class="carousel-caption d-none d-md-block">
                 <h5></h5>
                 <p>Some representative placeholder content for the first slide.</p>
@@ -78,7 +78,7 @@
                                             </a>
                                             <div class="single_product_text">
                                                 <h4>{{awesome.product.brand}}</h4>
-                                                <a href="{{awesome.product.get_url}}">
+                                                <a href="{{awesome.product.get_url}}" class="text-decoration-none">
                                                     <h3>{{awesome.product.product_name}}</h3>
                                                 </a>
                                                 <h3>${{awesome.product.price}}.00</h3>
@@ -271,7 +271,18 @@
         </div>
     </div>
 </section>
-<!--::subscribe_area part end::-->{% endblock content%}
+<!--::subscribe_area part end::-->
+{% endblock content%}
+
+
+{% block bootstrap %}
+<!-- JavaScript Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" 
+integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+<!--BOOTSTRAP Start-->
+{% endblock bootstrap %}
+
+
 
 
 
