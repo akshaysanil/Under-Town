@@ -80,7 +80,7 @@
                   <td>
                     <div class="product_count d-flex justify-content-center">
                       <div>
-                        <a href="{% url 'remove_cart' cart_item.product.id cart_item.id%}" type="button" class="fa-solid fa-angles-down btn"></a>
+                        <a href="{% url 'remove_cart' cart_item.product.id cart_item.id%}" type="button" class=" btn"> <i class="fa-solid fa-angles-down"></i></a>
                       </div>
                       <div> 
                         <p>{{cart_item.quantity}}</p>
@@ -91,7 +91,7 @@
                           {% for item in cart_item.variations.all %}
                             <input type="hidden" name="{{item.variation_category | lower}}" value="{{item.variation_value | capfirst}}">
                           {% endfor %}
-                            <button type="submit" class="fa-solid fa-angles-up btn"></button>
+                            <button type="submit" class=" btn"> <i class="fa-solid fa-angles-up"></i></button>
                         </form>
                       </div>
                     </div>
