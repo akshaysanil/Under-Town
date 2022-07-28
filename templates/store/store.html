@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block link %}
-<link rel="stylesheet" href="{% static 'store/css/price_rangs.css'%}">
+<link rel="stylesheet" href="{% static 'css/price_rangs.css'%}">
 {% endblock link %}
 {% block content %}
 
@@ -15,7 +15,7 @@
                     <div class="breadcrumb_iner">   
                         <div class="breadcrumb_iner_item">
                             <h2>for Him & Her</h2>
-                            <p>Store <span>-</span> Shop Category</p>
+                            
                         </div>
                     </div>
                 </div>
@@ -70,16 +70,20 @@
                                 <div class="range_item">
                                     <!-- <div id="slider-range"></div> -->
                                     <input type="text" class="js-range-slider" value="" />
-                                    <div class="d-flex">
-                                        <div class="price_text">
-                                            <p>Price :</p>
+
+                                    <form action="" method="GET">
+                                        <div class="d-flex">
+                                            <div class="price_text">
+                                                <p>Price :</p>
+                                            </div>
+                                            <div class="price_value d-flex justify-content-center">
+                                                <input type="text" class="js-input-from" id="amount" name="minimum" readonly />
+                                                <span>to</span>
+                                                <input type="text" class="js-input-to" id="amount" name="maximum" readonly />
+                                            </div>
                                         </div>
-                                        <div class="price_value d-flex justify-content-center">
-                                            <input type="text" class="js-input-from" id="amount" readonly />
-                                            <span>to</span>
-                                            <input type="text" class="js-input-to" id="amount" readonly />
-                                        </div>
-                                    </div>
+                                        <button type="submit" class="btn_3">filter</button>
+                                    </form>
                                 </div>
                             </div>
                         </aside>
@@ -91,14 +95,6 @@
                             <div class="product_top_bar d-flex justify-content-between align-items-center">
                                 <div class="single_product_menu">
                                     <p><span>{{product_count}} </span> Product Found</p>
-                                </div>
-                                <div class="single_product_menu d-flex">
-                                    <h5>short by : </h5>
-                                    <select>
-                                        <option data-display="Select">name</option>
-                                        <option value="1">price</option>
-                                        <option value="2">product</option>
-                                    </select>
                                 </div>
                             </div>
                         </div>
@@ -225,7 +221,7 @@
 {% endblock content %}
 
 {% block script %}
-<script src="{% static 'store/js/price_rangs.js'%}"></script>
+<script src="{% static 'js/price_rangs.js'%}"></script>
 {% endblock script %}
 
 

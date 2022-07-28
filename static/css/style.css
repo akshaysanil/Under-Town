@@ -21,6 +21,9 @@ body {
   font-size: 14px;
 }
 
+a:link {
+  text-decoration:None;
+}
 
 
 /* line 11, ../../01 cl html template/03_jun 2019/188_Aranoz shop_html/sass/_common.scss */
@@ -3731,7 +3734,7 @@ ul {
 .price_value input {
   border: 0px;
   text-align: center;
-  max-width: 30px;
+  max-width: 90px;
 }
 
 /* line 485, ../../01 cl html template/03_jun 2019/188_Aranoz shop_html/sass/_product.scss */

@@ -22,6 +22,10 @@ def store(
     sub_category_slug=None
     ):
 
+    filter_min = request.GET.get('minimum')
+    filter_max = request.GET.get('maximum')
+
+
     main_categories  = None
     categories       = None
     sub_categories   = None
@@ -30,7 +34,15 @@ def store(
     
     if main_category_slug != None:
         main_categories = get_object_or_404(MainCategory, slug = main_category_slug)
-        products        = Product.objects.filter(main_category = main_categories ,is_available= True)
+        if filter_max != None:
+            products = Product.objects.filter(
+                main_category = main_categories ,
+                is_available= True,
+                price__gte = filter_min,
+                price__lte = filter_max,
+                ).order_by('product_name')
+        else:
+            products = Product.objects.filter(main_category = main_categories ,is_available= True).order_by('product_name')
 
         #main_category pagination
         paginator = Paginator(products,9)
@@ -42,7 +54,15 @@ def store(
 
         if category_slug != None:
             categories    = get_object_or_404(Category,slug = category_slug)
-            products      = Product.objects.filter(category = categories , is_available = True)
+            if filter_max != None:
+                products = Product.objects.filter(
+                    category = categories ,
+                    is_available= True,
+                    price__gte = filter_min,
+                    price__lte = filter_max,
+                    ).order_by('product_name')
+            else:
+                products      = Product.objects.filter(category = categories , is_available = True).order_by('product_name')
              
             #category pagination
             paginator = Paginator(products,9)
@@ -52,7 +72,15 @@ def store(
 
             if sub_category_slug != None:
                 sub_categories = get_object_or_404(SubCategory,slug = sub_category_slug)
-                products       = Product.objects.filter(sub_category = sub_categories , is_available = True)
+                if filter_max != None:
+                    products = Product.objects.filter(
+                        sub_category = sub_categories ,
+                        is_available= True,
+                        price__gte = filter_min,
+                        price__lte = filter_max,
+                        ).order_by('product_name')
+                else:
+                    products       = Product.objects.filter(sub_category = sub_categories , is_available = True).order_by('product_name')
 
                 #sub category pagination
                 paginator = Paginator(products,9)
@@ -61,7 +89,15 @@ def store(
                 product_count = products.count()
 
     else:
-        products = Product.objects.all().filter(is_available=True).order_by('id')
+        if filter_max != None:
+            products = Product.objects.filter(
+                is_available= True,
+                price__gte = filter_min,
+                price__lte = filter_max,
+                ).order_by('product_name')
+        else:
+            products = Product.objects.all().filter(is_available=True).order_by('product_name')
+
 
         #store pagination
         paginator = Paginator(products,9)

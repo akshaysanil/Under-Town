@@ -5,14 +5,13 @@
 {% block content %}
 
  <!-- breadcrumb start-->
- <section class="breadcrumb " style="background-color:#DAE2B6">
+ <section class="breadcrumb " style="background-color:#FFDCDC">
     <div class="container">
       <div class="row justify-content-center">
         <div class="col-lg-8">
           <div class="breadcrumb_iner">
             <div class="breadcrumb_iner_item">
               <h2>Shop Single</h2>
-              <p>Home <span>-</span> Shop Single</p>
             </div>
           </div>
         </div>
@@ -60,8 +59,8 @@
                   <h2>${{single_product.price}}.00</h2>
                   <ul class="list">
                     <li>
-                      <a class="active" href=brave://bookmarks/"#">
-                        <span>Category</span> : {{sinle_product.category.category_name}}</a> 
+                      <a class="active" href="{{single_product.category.get_url}}">
+                        <span>Category</span> : {{single_product.category.category_name}}</a> 
                     </li>
                     {% if single_product.stock <= 0 %}
                       <li>
@@ -83,12 +82,10 @@
 
                   <div class="item-option-select " >
                     <h6>Choose Color</h6>
-                    <select class="btn-group btn-group-sm btn-group-toggle form-select " aria-label="Default select" data-toggle="buttons" name="color" required>
+                    <select class="form-select"  name="color" required>
                       <option value="" disabled selected >choose color</option>
                       {% for i in single_product.variation_set.colors %}
-                      <label class="btn btn-light">
-                        <option type="radio" name="radio_color"  value="{{i.variation_value | lower}}" >{{i.variation_value | capfirst}}</option>
-                      </label>
+                        <option value="{{i.variation_value | lower}}" >{{i.variation_value | capfirst}}</option>
                       {% endfor %} 
                       
                     </select> 
@@ -103,12 +100,10 @@
                 <div class="row">
                   <div class="item-option-select">
                     <h6>Select Size</h6>
-                    <select class="btn-group btn-group-sm btn-group-toggle form-select" aria-label="Default select" data-toggle="buttons" name="size" required>
+                    <select class="form-select"  name="size" required>
                       <option value="" disabled selected>choose size</option>
                       {% for i in single_product.variation_set.sizes %}
-                      <label class="btn btn-light">
-                        <option type="radio" name="radio_size"  value="{{i.variation_value | lower}}" >{{i.variation_value | capfirst}}</option>
-                      </label>
+                        <option  value="{{i.variation_value | lower}}" >{{i.variation_value | capfirst}}</option>
                       {% endfor %} 
                       
                       </select>

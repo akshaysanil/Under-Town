@@ -28,24 +28,22 @@
     <link rel="stylesheet" href="{% static 'css/slick.css' %}">
     
     {% block link %}{% endblock link %}
-
-     <!-- custom CSS -->
-     <link rel="stylesheet" href="{% static 'css/custom.css' %}">
-     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+    <!-- custom CSS -->
+    <link rel="stylesheet" href="{% static 'css/custom.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- style CSS -->
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <!-- paypal js -->
     <script src="https://www.paypal.com/sdk/js?client-id=AS8dCNHoBXvRYw9P0lz_yXEByDXiNPcgRWkcM5nTxR64-R58HqJ-MGPB0wQC6YiXf-wE_68dFp7WVw0_&currency=USD"></script>
     <!-- font awesome-->
     <script src="https://kit.fontawesome.com/8019cd84ed.js" crossorigin="anonymous"></script>
-
+    
     <!--BOOTSTRAP Start-->
     <!-- CSS only -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" 
-    integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    
 
-
-    {% block bootstrap %} {% endblock bootstrap %}
+    {% block bootstrap %}{% endblock bootstrap %}
 
 
 
@@ -59,15 +57,13 @@
 {% comment %} navbar {% endcomment %}
 {% include 'includes/navbar.html' %}
 
-    
-
 {% block content %}
 {% comment %} content {% endcomment %}
 {% endblock content %}
 
 {% comment %} footer {% endcomment %}
 {% include 'includes/footer.html' %}
-
+{% block script %}{% endblock script %}
 <script>
     window.setTimeout(function() {
       $(".alert").fadeTo(500, 0).slideUp(500, function(){
@@ -75,4 +71,5 @@
       });
     }, 2000);
 </script>
-{% block script %}{% endblock script %}
+</body>
+
