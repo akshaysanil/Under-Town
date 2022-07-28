@@ -153,11 +153,11 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
-# STATIC_URL = 'static/'
+STATIC_URL = 'static/'
 # STATIC_ROOT = BASE_DIR / 'static'
-# STATICFILES_DIRS = [ 
-#     'under_town/static',
-# ]
+STATICFILES_DIRS = [ 
+    'under_town/static',
+]
 AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY')
 AWS_STORAGE_BUCKET_NAME = config('AWS_STORAGE_BUCKET_NAME')

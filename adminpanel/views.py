@@ -11,15 +11,18 @@ from store.models import BestSellers, Carousel, Product, ProductGallery, Variati
 from home.models import Awesome
 from home.forms import CarouselForm
 from django.template.defaultfilters import slugify
-from django.db.models import Sum
+from django.db.models import Sum,Count
+from django.contrib.auth.decorators import login_required 
+from django.db.models.functions import TruncMonth,TruncMinute,TruncDay
+import datetime
+from django.db.models import Q
 
 from django.core.paginator import EmptyPage,PageNotAnInteger,Paginator
 
 
 # Create your views here.
 
-
-
+@login_required(login_url="login")
 def user_accounts_table(request,id):
     if request.user.is_superadmin:
         active_users = Account.objects.all().filter(is_admin=False,is_active=True)
@@ -35,6 +38,8 @@ def user_accounts_table(request,id):
     else:
         return redirect ('home')
 
+
+@login_required(login_url="login")
 def ban_user(request,id):
     if request.user.is_superadmin:
         user           = Account.objects.get(id=id)
@@ -44,6 +49,8 @@ def ban_user(request,id):
     else:
         return redirect ('home')
 
+
+@login_required(login_url="login")
 def unban_user(request,id):
     if request.user.is_superadmin:
         user           = Account.objects.get(id=id)
@@ -53,7 +60,7 @@ def unban_user(request,id):
     else:
         return redirect ('home')
     
-
+@login_required(login_url="login")
 def cart_table(request,id):
     if request.user.is_superadmin:
         carts = Cart.objects.all()
@@ -69,7 +76,7 @@ def cart_table(request,id):
     else:
         return redirect ('home')
 
-
+@login_required(login_url="login")
 def category_table(request,id):
     if request.user.is_superadmin:
         main_category = MainCategory.objects.all()
@@ -90,6 +97,9 @@ def category_table(request,id):
         return redirect ('home')
 
 # main category
+
+
+@login_required(login_url="login")
 def add_main_category(request):
     if request.user.is_superadmin:
         form = MainCategoryForm()
@@ -110,6 +120,9 @@ def add_main_category(request):
     else:
         return redirect ('home')
 
+
+
+@login_required(login_url="login")
 def edit_main_category(request,id):
     if request.user.is_superadmin:
         main_category = MainCategory.objects.get(id=id)
@@ -132,6 +145,8 @@ def edit_main_category(request,id):
     else:
         return redirect ('home')
 
+
+@login_required(login_url="login")
 def delete_main_category(request,id):
     if request.user.is_superadmin:
         main_category = MainCategory.objects.get(id=id)
@@ -142,6 +157,8 @@ def delete_main_category(request,id):
 # main category end
 
 # category start
+
+@login_required(login_url="login")
 def add_category(request):
     if request.user.is_superadmin:
         form = CategoryForm()
@@ -162,7 +179,7 @@ def add_category(request):
     else:
         return redirect('home')
 
-
+@login_required(login_url="login")
 def edit_category(request,id):
     if request.user.is_superadmin:
         category = Category.objects.get(id=id)
@@ -185,6 +202,8 @@ def edit_category(request,id):
     else:
         return redirect('home')
 
+
+@login_required(login_url="login")
 def delete_category(request,id):
     if request.user.is_superadmin:
         category = Category.objects.get(id=id)
@@ -195,7 +214,9 @@ def delete_category(request,id):
 
 # category end
 
-# sub Category start
+# sub Category star
+
+@login_required(login_url="login")
 def add_sub_category(request):
     if request.user.is_superadmin:
         form = SubCategoryForm()
@@ -218,6 +239,8 @@ def add_sub_category(request):
     else:
         return redirect('home')
 
+
+@login_required(login_url="login")
 def edit_sub_category(request,id):
     if request.user.is_superadmin:
         sub_category = SubCategory.objects.get(id=id)
@@ -240,6 +263,8 @@ def edit_sub_category(request,id):
     else:
         return redirect('home')
 
+
+@login_required(login_url="login")
 def delete_sub_category(request,id):
     if request.user.is_superadmin:
         sub_category = SubCategory.objects.get(id=id)
@@ -248,32 +273,76 @@ def delete_sub_category(request,id):
     else:
         return redirect('home')
 
-# sub category end
-                    # category end
-           
 
+           
+@login_required(login_url="login")
 def order_table(request,id):
     if request.user.is_superadmin:
-        orders = Order.objects.all()
+        orders = Order.objects.filter(is_ordered=True,status='New')
+        accepted_orders = Order.objects.filter(is_ordered=True,status='Accepted')
+        completed_orders = Order.objects.filter(is_ordered=True,status="Completed")
+        cancelled_orders = Order.objects.filter(is_ordered=True,status="Cancelled")
         order_products = OrderProduct.objects.all()
         payments = Payment.objects.all()
         context = {
             'orders' : orders,
             'order_products' : order_products,
             'payments' : payments,
+            'accepted_orders' : accepted_orders,
+            'completed_orders' : completed_orders,
+            'cancelled_orders' : cancelled_orders,
         }
 
         if id==1:
             return render (request,'adminpanel/order_table/orders.html',context)
         elif id==2:
-            return render(request,'adminpanel/order_table/order_products.html',context)
+            return render(request,'adminpanel/order_table/accepted_orders.html',context)
+        elif id==3:
+            return render(request,'adminpanel/order_table/completed_orders.html',context)
+        elif id==4:
+            return render(request,'adminpanel/order_table/cancelled_orders.html',context)
         else:
             return render(request,'adminpanel/order_table/payments.html',context)
     else:
         return redirect('home')
 
 
+@login_required(login_url="login")
+def order_accepted(request,order_id):
+    if request.user.is_superadmin:
+        order = Order.objects.get(id=order_id)
+        order.status = 'Accepted'
+        order.save()
+        return redirect('order_table',id=1)
+    else:
+        return redirect ('home')
 
+
+@login_required(login_url="login")
+def order_completed(request,order_id):
+    if request.user.is_superadmin:
+        order=Order.objects.get(id=order_id)
+        order.status = 'Completed'
+        order.save()
+        return redirect('order_table',id=2)
+    else:
+        return redirect('home')
+
+
+@login_required(login_url="login")
+def order_cancelled(request,order_id):
+    if request.user.is_superadmin:
+        order=Order.objects.get(id=order_id)
+        order.status = 'Cancelled'
+        order.save()
+        return redirect('order_table',id=1 )
+    else:
+        return render(request,'adminpanel/order_table/order_cancelled.html')
+
+
+
+
+@login_required(login_url="login")
 def store_table(request,id):
     if request.user.is_superadmin:
         products = Product.objects.all()
@@ -290,6 +359,8 @@ def store_table(request,id):
     else:
         return redirect('home')
 
+
+@login_required(login_url="login")
 def add_product(request):
     if request.user.is_superadmin:
         form = ProductForm()
@@ -318,11 +389,11 @@ def add_product(request):
     else:
         return redirect('home')
 
+@login_required(login_url="login")
 def edit_product(request,id):
     if request.user.is_superadmin:
         product = Product.objects.get(id=id)
         more_images = ProductGallery.objects.filter(product=product)
-        print('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',more_images)
         if request.method =='POST':
             form = ProductForm(request.POST,request.FILES,instance=product)
             if form.is_valid():
@@ -352,6 +423,8 @@ def edit_product(request,id):
     else:
         return redirect ('home')
 
+
+@login_required(login_url="login")
 def delete_product(request,id):
     if request.user.is_superadmin:
         product = Product.objects.get(id=id)
@@ -360,7 +433,8 @@ def delete_product(request,id):
     else:
         return redirect ('home')
 
-        
+
+@login_required(login_url="login")     
 def add_variations(request):
     if request.user.is_superadmin:
         form = VariationForm()
@@ -379,6 +453,8 @@ def add_variations(request):
     else:
         return redirect('home')
 
+
+@login_required(login_url="login")
 def edit_variations(request,id):
     if request.user.is_superadmin:
         variation = Variation.objects.get(id=id)
@@ -396,6 +472,8 @@ def edit_variations(request,id):
     else:
         return redirect ('home')
 
+
+@login_required(login_url="login")
 def delete_variatons(request,id):
     if request.user.is_superadmin:
         variation = Variation.objects.get(id=id)
@@ -404,6 +482,8 @@ def delete_variatons(request,id):
     else:
         return redirect ('home')
 
+
+@login_required(login_url="login")
 def home_table(request,id):
     if request.user.is_superadmin:
         carousels = Carousel.objects.all()
@@ -424,6 +504,8 @@ def home_table(request,id):
     else: 
         return redirect ('home')
 
+
+@login_required(login_url="login")
 def add_carousels(request):
     if request.user.is_superadmin:
         form = CarouselForm()
@@ -443,6 +525,7 @@ def add_carousels(request):
         return redirect('home')
 
 
+@login_required(login_url="login")
 def edit_carousel(request,id):
     if request.user.is_superadmin:
         carousel = Carousel.objects.get(id=id)
@@ -460,7 +543,8 @@ def edit_carousel(request,id):
     else:
         return redirect ('home')
 
-        
+
+@login_required(login_url="login")   
 def carousel_not_available(request,id):
     if request.user.is_superadmin:
         carousel           = Carousel.objects.get(id=id)
@@ -470,6 +554,8 @@ def carousel_not_available(request,id):
     else:
         return redirect ('home')
 
+
+@login_required(login_url="login")
 def caraousel_available(request,id):
     if request.user.is_superadmin:
         carousel           = Carousel.objects.get(id=id)
@@ -479,6 +565,8 @@ def caraousel_available(request,id):
     else:
         return redirect ('home')
 
+
+@login_required(login_url="login")
 def delete_carousel(request,id):
     if request.user.is_superadmin:
         carousel = Carousel.objects.get(id=id)
@@ -492,19 +580,80 @@ def delete_carousel(request,id):
 
 
 
-
+@login_required(login_url="login")
 def adminpanel(request):
     if request.user.is_superadmin:
-        total_revenue = Order.objects.filter(is_ordered = True).aggregate(sum = Sum('order_total',))['sum']
+        total_revenue = round( Order.objects.filter(is_ordered = True).aggregate(sum = Sum('order_total'))['sum'])
 
-        total_cost= (total_revenue * .80)
-        total_profit = (total_revenue - total_cost)  
 
+        total_cost= round((total_revenue * .80))
+        total_profit = round(total_revenue - total_cost)  
+        chart_year = datetime.date.today().year
+        chart_month = datetime.date.today().month
+
+        #getting daily revenue
+        daily_revenue = Order.objects.filter(                     
+            created_at__year=chart_year,created_at__month=chart_month
+        ).order_by('created_at').annotate(day=TruncMinute('created_at')).values('day').annotate(sum=Sum('order_total')).values('day','sum')
+
+        day=[]
+        revenue=[]
+        for i in daily_revenue:
+            day.append(i['day'].minute)
+            revenue.append(int(i['sum']))
+
+        male = MainCategory.objects.get(main_category_name = 'MEN')
+        female = MainCategory.objects.get(main_category_name = 'WOMEN')
+        product_count = OrderProduct.objects.all().count()
+
+       
         context = {
             'total_revenue' : total_revenue,
             'total_cost' : total_cost,
             'total_profit' : total_profit,
+            'male' : male,
+            'female' : female,
+            'product_count' : product_count,
+            'day' : day,
+            'revenue' : revenue,
         }
         return render (request,'adminpanel/adminpanel.html',context)
     else:
         return redirect('home')
+
+
+def admin_search(request):
+    if 'keyword' in request.GET:
+        keyword = request.GET['keyword']
+        if keyword:
+            products = Product.objects.order_by('-created_date').filter(
+                Q(description__icontains = keyword) | Q(product_name__icontains = keyword) | Q(brand__icontains = keyword)
+                )
+            orders = Order.objects.order_by('-created_date').filter(
+                Q(order_number__icontains= keyword) | Q(address_line_1__icontains= keyword)
+                | Q(status__icontains = keyword) 
+            )
+            main_category = MainCategory.objects.filter()
+
+            
+            paginator = Paginator(products,9)
+            page = request.GET.get('page')
+            paged_proucts = paginator.get_page(page)
+
+            product_count = products.count()
+        else:
+            products = Product.objects.all()
+            paginator = Paginator(products,9)
+            page = request.GET.get('page')
+            paged_proucts = paginator.get_page(page)
+
+            product_count = products.count()
+        context = {
+            'products':paged_proucts,
+            'product_count' : product_count,
+            'orders' : orders,
+
+        }
+        
+        return render(request,'adminpanel/search.html',context)
+    return redirect('adminpanel')

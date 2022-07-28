@@ -1,4 +1,3 @@
-
 from django.http import JsonResponse
 from django.shortcuts import redirect, render
 from cart.models import Cart, CartItem
@@ -9,6 +8,7 @@ from store.models import Product
 import json
 from django.core.mail import EmailMessage
 from django.template.loader import render_to_string
+from category.models import MainCategory
 
 # Create your views here.
 
@@ -51,6 +51,11 @@ def payments(request):
         # reduce the quantity of the sold products
         product = Product.objects.get(id=item.product_id)
         product.stock -= item.quantity
+
+        product.main_category.count_sold += item.quantity
+        cat = MainCategory.objects.get(id = product.main_category.id)
+        cat.count_sold += item.quantity
+        cat.save()
         product.save()
 
 
@@ -159,4 +164,7 @@ def order_complete(request):
         return render(request,'orders/order_complete.html',context)   
     except(Payment.DoesNotExist, Order.DoesNotExist):
         return redirect ('home')
+
+
+
              

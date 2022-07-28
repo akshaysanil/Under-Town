@@ -8,6 +8,7 @@ class MainCategory(models.Model):
     slug               = models.SlugField(max_length=100,unique=True)
     description        = models.TextField(blank=True)
     image              = models.ImageField(upload_to='photos/category' , blank=True)
+    count_sold         = models.IntegerField(default=0)
 
     class Meta:
         verbose_name       = 'Maincategory'

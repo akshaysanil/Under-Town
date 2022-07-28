@@ -8,13 +8,13 @@
 <div class="container-fluid">
 
    <!-- Page Heading -->
-   <h1 class="h3 mb-2 text-gray-800">New Orders Table</h1>
+   <h1 class="h3 mb-2 text-gray-800">Accepted Orders</h1>
    <p class="mb-4">Orders and its details</p>
    
 <!-- DataTales Example -->
 <div class="card shadow mb-4">
     <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">New Orders  </h6>
+        <h6 class="m-0 font-weight-bold text-primary">Accepted Orders</h6>
     </div>
     <div class="card-body">
         <div class="table-responsive">
@@ -35,9 +35,8 @@
                
 
                 <tbody>
-
-                    {% if orders %}
-                        {% for order in orders %}
+                                  
+                        {% for order in accepted_orders %}
                             <tr>
                                 <td>{{order.order_number}}</td>
                                 <td>{{order.email}}</td>
@@ -46,14 +45,9 @@
                                 <td>{{order.created_at}}</td>
                                 <td>{{order.address_line_1}}</td>
                                 <td class="text-center">
-                                    <a href="{% url 'order_accepted' order.id %}" class="btn btn-warning">Accept order</a>
-                                    <a href="{% url 'order_cancelled' order.id %}" class="btn btn-danger">Cancel order</a>
-
-                                </td>
-
+                                    <a href="{% url 'order_completed' order.id %}" class="btn btn-success">Complete order</a></td>
                             </tr>
                         {% endfor %}
-                    {% endif %}
                     
                 </tbody>
             </table>

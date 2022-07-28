@@ -74,9 +74,7 @@
                     {% endif %}
 
                   </ul>
-                  <p>
-                  {{single_product.description}}
-                  </p>
+                  
                   <hr>
 
  {% comment %} varitions {% endcomment %}
@@ -85,8 +83,8 @@
 
                   <div class="item-option-select " >
                     <h6>Choose Color</h6>
-                    <select class="btn-group btn-group-sm btn-group-toggle form-select" aria-label="Default select" data-toggle="buttons" name="color" required>
-                      <option value="" disabled selected>choose color</option>
+                    <select class="btn-group btn-group-sm btn-group-toggle form-select " aria-label="Default select" data-toggle="buttons" name="color" required>
+                      <option value="" disabled selected >choose color</option>
                       {% for i in single_product.variation_set.colors %}
                       <label class="btn btn-light">
                         <option type="radio" name="radio_color"  value="{{i.variation_value | lower}}" >{{i.variation_value | capfirst}}</option>

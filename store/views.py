@@ -83,6 +83,7 @@ def store(
         'main':main_categories,
     }
     return render (request,'store/store.html',context)
+    
 
 
 def product_detail(

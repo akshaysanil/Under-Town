@@ -76,7 +76,7 @@
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse3"
             aria-expanded="true" aria-controls="collapseTwo">
             <i class="fas fa-fw fa-cog"></i>
-            <span>Category</span>
+            <span>Categories</span>
         </a>
         <div id="collapse3" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
@@ -96,14 +96,17 @@
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse4"
             aria-expanded="true" aria-controls="collapseTwo">
             <i class="fas fa-fw fa-cog"></i>
-            <span>Orders</span>
+            <span>Orders & payment</span>
         </a>
         <div id="collapse4" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Custom Components:</h6>
-                <a class="collapse-item" href="{% url 'order_table' 1 %}">orders</a>
-                <a class="collapse-item" href="{% url 'order_table' 2 %}">order products</a>
-                <a class="collapse-item" href="{% url 'order_table' 3 %}">payments</a>
+                <a class="collapse-item" href="{% url 'order_table' 1 %}">New orders</a>
+                <a class="collapse-item" href="{% url 'order_table' 2 %}">Accepted orders</a>
+                <a class="collapse-item" href="{% url 'order_table' 3 %}">Completed orders</a>
+                <a class="collapse-item" href="{% url 'order_table' 4 %}">Cancelled orders</a>
+                <a class="collapse-item" href="{% url 'order_table' 5 %}">payments</a>
+
 
                 
             </div>
@@ -115,7 +118,7 @@
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse5"
             aria-expanded="true" aria-controls="collapseTwo">
             <i class="fas fa-fw fa-cog"></i>
-            <span>Store</span>
+            <span>Products & Variations</span>
         </a>
         <div id="collapse5" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
@@ -129,42 +132,8 @@
         </div>
     </li>
 
-    <!-- Nav Item - Utilities Collapse Menu -->
-    <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
-            aria-expanded="true" aria-controls="collapseUtilities">
-            <i class="fas fa-fw fa-wrench"></i>
-            <span>carousel</span>
-        </a>
-        <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
-            data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Custom Utilities:</h6>
-                <a class="collapse-item" href="utilities-color.html">Colors</a>
-                <a class="collapse-item" href="utilities-border.html">Borders</a>
-                <a class="collapse-item" href="utilities-animation.html">Animations</a>
-                <a class="collapse-item" href="utilities-other.html">Other</a>
-            </div>
-        </div>
-    </li>
+    
 
-    <!-- Divider -->
-    <hr class="sidebar-divider">
-
-    <!-- Divider -->
-    <hr class="sidebar-divider d-none d-md-block">
-
-    <!-- Sidebar Toggler (Sidebar) -->
-    <div class="text-center d-none d-md-inline">
-        <button class="rounded-circle border-0" id="sidebarToggle"></button>
-    </div>
-
-    <!-- Sidebar Message -->
-    <div class="sidebar-card d-none d-lg-flex">
-        <img class="sidebar-card-illustration mb-2" src="{% static 'admin/img/undraw_rocket.svg'%}" alt="...">
-        <p class="text-center mb-2"><strong>SB Admin Pro</strong> is packed with premium features, components, and more!</p>
-        <a class="btn btn-success btn-sm" href="https://startbootstrap.com/theme/sb-admin-pro">Upgrade to Pro!</a>
-    </div>
-
+    
 </ul>
 <!-- End of Sidebar -->

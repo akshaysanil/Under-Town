@@ -1,19 +1,21 @@
 {% extends 'base.html' %}
 {% load static %}
-
+{% block link %}
+<link rel="stylesheet" href="{% static 'store/css/price_rangs.css'%}">
+{% endblock link %}
 {% block content %}
 
  <!--================Home Banner Area =================-->
     <!-- breadcrumb start-->
-    <section class="breadcrumb" style="background-image: url('static/img/breadcrumb/marvel_banner.png');">
+    <section class="breadcrumb" style=" background-color:#DEEDF0;">
         <div class="container">
             {% comment %} <img src="{% static 'img/breadcrumb/marvel_banner.png' %}" alt=""> {% endcomment %}
             <div class="row justify-content-center">
                 <div class="col-lg-8">
                     <div class="breadcrumb_iner">   
                         <div class="breadcrumb_iner_item">
-                            <h2>Shop OnStore</h2>
-                            <p>Home <span>-</span> Shop Category</p>
+                            <h2>for Him & Her</h2>
+                            <p>Store <span>-</span> Shop Category</p>
                         </div>
                     </div>
                 </div>
@@ -28,7 +30,7 @@
             <div class="row">
                 <div class="col-lg-3">
                     <div class="left_sidebar_area">
-                        <aside class="left_widgets p_filter_widgets">
+                        <aside class="left_widgets p_filter_widgets"  >
                             <div class="l_w_title">
                                 <h3>Browse Categories</h3>
                             </div>
@@ -47,12 +49,6 @@
                                                     {% for category in main_category.category_set.all%}
                                                         <li>
                                                             <a class='dropdown-item' href="{{category.get_url}}">{{category.category_name}}</a>
-                                                            <ul>
-                                                                {% for i in category.subcategory_set.all %}
-                                                                <li>
-                                                                    <a id="sub_dropdown" href="{{i.get_url}}">{{i.sub_category_name}}</li></a>
-                                                                {% endfor %}
-                                                            </ul>
                                                         </li>
                                                     {% endfor %}
                                                 </ul>
@@ -66,7 +62,7 @@
 
                         
 
-                        <aside class="left_widgets p_filter_widgets price_rangs_aside">
+                        <aside class="left_widgets p_filter_widgets price_rangs_aside" >
                             <div class="l_w_title">
                                 <h3>Price Filter</h3>
                             </div>
@@ -104,31 +100,9 @@
                                         <option value="2">product</option>
                                     </select>
                                 </div>
-                                {% comment %} <div class="single_product_menu d-flex">
-                                    <h5>show :</h5>
-                                    <div class="top_pageniation">
-                                        <ul>
-                                            <li>1</li>
-                                            <li>2</li>
-                                            <li>3</li>
-                                        </ul>
-                                    </div>
-                                </div> {% endcomment %}
-<!-- single product menu >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>.....-->
-                                {% comment %} <div class="single_product_menu d-flex">
-                                    <div class="input-group">
-                                        <input type="text" class="form-control" placeholder="search"
-                                            aria-describedby="inputGroupPrepend">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text" id="inputGroupPrepend"><i
-                                                    class="ti-search"></i></span>
-                                        </div>
-                                    </div>
-                                </div> {% endcomment %}
                             </div>
                         </div>
                     </div>
- {% comment %} product adding {% endcomment %}
 
                     <div class="row align-items-center latest_product_inner">
 
@@ -248,8 +222,11 @@
     </section>
     <!-- product_list part end-->
 
-
 {% endblock content %}
+
+{% block script %}
+<script src="{% static 'store/js/price_rangs.js'%}"></script>
+{% endblock script %}
 
 
 

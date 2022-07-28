@@ -26,6 +26,9 @@
     <link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}">
     <!-- swiper CSS -->
     <link rel="stylesheet" href="{% static 'css/slick.css' %}">
+    
+    {% block link %}{% endblock link %}
+
      <!-- custom CSS -->
      <link rel="stylesheet" href="{% static 'css/custom.css' %}">
      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -72,3 +75,4 @@
       });
     }, 2000);
 </script>
+{% block script %}{% endblock script %}

@@ -6,14 +6,13 @@
 
  <!--================Home Banner Area =================-->
   <!-- breadcrumb start-->
-  <section class="breadcrumb ">
+  <section class="breadcrumb " style='background-color:#91C788'>
     <div class="container">
       <div class="row justify-content-center">
         <div class="col-lg-8">
           <div class="breadcrumb_iner">
             <div class="breadcrumb_iner_item">
-              <h2>Cart Products</h2>
-              <p>Fashion <span>-</span>Cart Products</p>
+              <h2>Cart </h2>
             </div>
           </div>
         </div>
@@ -86,10 +85,11 @@
                         <p>{{cart_item.quantity}}</p>
                       </div>
                       <div class="input-group-append">
-                        <form action="{% url 'add_cart' cart_item.product.id  %}" method="POST">
+                        <form action="{% url 'add_cart' cart_item.product.id  %}" method="POST" id="add">
                           {% csrf_token %}
                           {% for item in cart_item.variations.all %}
                             <input type="hidden" name="{{item.variation_category | lower}}" value="{{item.variation_value | capfirst}}">
+                            <input type="hidden" id="pid" value="{{cart_item.product.id}}">
                           {% endfor %}
                             <button type="submit" class=" btn"> <i class="fa-solid fa-angles-up"></i></button>
                         </form>
@@ -148,5 +148,47 @@
   <!--================End Cart Area =================-->
 
 
+  <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+
+<script>
+
+ // function addtoCart(productId) {
+
+ //   console.log("calling", productId)
+
+   // $.ajax({
+   //   url: "/cart/add_cart/" + productId +"/",
+ //    data: {
+  //      productId
+  //    },
+  //    method: "post",
+  //   success: (response) => {
+ //     }
+  //  })
+
+ // }
+
+ $(document).ready(function () {
+  $("#add").submit(function (event) {
+    console.log("Haii I am working")
+    $.ajax({
+      type: "POST",
+      url: "/cart/add_cart/" + $('#pid').val() + "/",
+      data: {
+        'productId': $('#pid').val() // from form,
+        'csrfmiddlewaretoken': '{{ csrf_token }}'
+      },
+      success: function () {
+        $('#message').html("<h2>Contact Form Submitted!</h2>")
+      }
+    });
+    return false; //<---- move it here
+  });
+
+});
+  
+</script>
+
 
 {% endblock content %}
+
