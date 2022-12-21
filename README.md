@@ -13,7 +13,7 @@
 # Installation
 - To install Under Town, follow these steps:
 
-Clone the repository: git clone https://github.com/<your_username>/undertown.git
+Clone the repository: git clone https://github.com/akshaysanil/Under-Town.git
 Install dependencies: pip install -r requirements.txt
 Migrate the database: python manage.py migrate
 Run the server: python manage.py runserver
